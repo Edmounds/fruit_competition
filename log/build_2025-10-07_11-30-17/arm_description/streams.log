@@ -1,0 +1,44 @@
+[1.424s] Invoking command in '/home/rc1/fruit_ws/build/arm_description': PYTHONPATH=/home/rc1/fruit_ws/build/arm_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rc1/fruit_ws/install/arm_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rc1/fruit_ws/build/arm_description/build --no-deps symlink_data
+[1.766s] running develop
+[1.920s] running egg_info
+[1.920s] creating arm_description.egg-info
+[1.920s] writing arm_description.egg-info/PKG-INFO
+[1.921s] writing dependency_links to arm_description.egg-info/dependency_links.txt
+[1.922s] writing entry points to arm_description.egg-info/entry_points.txt
+[1.922s] writing requirements to arm_description.egg-info/requires.txt
+[1.922s] writing top-level names to arm_description.egg-info/top_level.txt
+[1.922s] writing manifest file 'arm_description.egg-info/SOURCES.txt'
+[1.924s] reading manifest file 'arm_description.egg-info/SOURCES.txt'
+[1.925s] writing manifest file 'arm_description.egg-info/SOURCES.txt'
+[1.926s] running build_ext
+[1.926s] Creating /home/rc1/fruit_ws/install/arm_description/lib/python3.10/site-packages/arm-description.egg-link (link to .)
+[1.927s] 
+[1.927s] Installed /home/rc1/fruit_ws/build/arm_description
+[1.927s] running symlink_data
+[1.927s] creating /home/rc1/fruit_ws/install/arm_description/share/ament_index
+[1.928s] creating /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index
+[1.928s] creating /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index/packages
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/resource/arm_description -> /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index/packages
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/package.xml -> /home/rc1/fruit_ws/install/arm_description/share/arm_description
+[1.928s] creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/launch/display.launch.py -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/launch/gazebo.launch.py -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+[1.928s] creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/materials.xacro -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.gazebo -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.ros2control -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+[1.928s] symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.xacro -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+[1.929s] creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand1_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link1_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link3_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand2_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/base_link.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.929s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand0_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.930s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link2_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.930s] symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link4_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+[1.930s] creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+[1.930s] symbolically linking /home/rc1/fruit_ws/build/arm_description/config/display.rviz -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+[1.930s] symbolically linking /home/rc1/fruit_ws/build/arm_description/config/gazebo.rviz -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+[1.930s] symbolically linking /home/rc1/fruit_ws/build/arm_description/config/ros_gz_bridge_gazebo.yaml -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+[1.967s] Invoked command in '/home/rc1/fruit_ws/build/arm_description' returned '0': PYTHONPATH=/home/rc1/fruit_ws/build/arm_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/rc1/fruit_ws/install/arm_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/rc1/fruit_ws/build/arm_description/build --no-deps symlink_data

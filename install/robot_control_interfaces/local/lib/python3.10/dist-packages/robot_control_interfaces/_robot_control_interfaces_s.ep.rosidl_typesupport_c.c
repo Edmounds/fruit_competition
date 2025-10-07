@@ -1,0 +1,1 @@
+/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_generator_py/robot_control_interfaces/_robot_control_interfaces_s.ep.rosidl_typesupport_c.c

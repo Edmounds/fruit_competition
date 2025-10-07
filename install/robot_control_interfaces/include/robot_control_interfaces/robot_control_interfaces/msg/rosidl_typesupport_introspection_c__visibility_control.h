@@ -1,0 +1,1 @@
+/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_typesupport_introspection_c/robot_control_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h

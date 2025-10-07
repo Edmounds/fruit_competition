@@ -1,0 +1,43 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from robot_control_interfaces/topic/SerialData.msg
+// generated code does not contain a copyright notice
+
+
+module robot_control_interfaces {
+  module msg {
+    @verbatim (language="comment", text=
+      "This is for fruit_robot")
+    struct SerialData {
+      @verbatim (language="comment", text=
+        " nuc ->>>" "\n"
+        "navigate" "\n"
+        " 机器人前进/后退线速度 (m/s), 字节位置 3~6")
+      float linear_x;
+
+      @verbatim (language="comment", text=
+        "机器人自转角速度 (rad/s), 字节位置 7~10")
+      float angular_z;
+
+      @verbatim (language="comment", text=
+        "arm" "\n"
+        " 舵机1 (云台) 目标角度 (0-3600 代表 0-360.0 度), 字节位置 11~12")
+      uint16 servo1;
+
+      @verbatim (language="comment", text=
+        "舵机5 目标角度, 字节位置 13~14")
+      uint16 servo2;
+
+      @verbatim (language="comment", text=
+        "舵机2 目标角度, 字节位置 15~16")
+      uint16 servo3;
+
+      @verbatim (language="comment", text=
+        "舵机4 目标角度, 字节位置 17~18")
+      uint16 servo4;
+
+      @verbatim (language="comment", text=
+        "舵机3 (夹爪) 状态值: 1 代表闭合, 0 代表张开, 字节位置 19~20")
+      uint16 servo5;
+    };
+  };
+};

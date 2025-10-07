@@ -1,0 +1,1 @@
+/home/rc1/fruit_ws/build/robot_control_interfaces/ament_cmake_core/robot_control_interfacesConfig-version.cmake

@@ -1,0 +1,1 @@
+/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_generator_cpp/robot_control_interfaces/action/detail/move_robot__struct.hpp

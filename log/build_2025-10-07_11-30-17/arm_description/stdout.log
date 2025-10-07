@@ -1,0 +1,42 @@
+running develop
+running egg_info
+creating arm_description.egg-info
+writing arm_description.egg-info/PKG-INFO
+writing dependency_links to arm_description.egg-info/dependency_links.txt
+writing entry points to arm_description.egg-info/entry_points.txt
+writing requirements to arm_description.egg-info/requires.txt
+writing top-level names to arm_description.egg-info/top_level.txt
+writing manifest file 'arm_description.egg-info/SOURCES.txt'
+reading manifest file 'arm_description.egg-info/SOURCES.txt'
+writing manifest file 'arm_description.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/rc1/fruit_ws/install/arm_description/lib/python3.10/site-packages/arm-description.egg-link (link to .)
+
+Installed /home/rc1/fruit_ws/build/arm_description
+running symlink_data
+creating /home/rc1/fruit_ws/install/arm_description/share/ament_index
+creating /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index
+creating /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index/packages
+symbolically linking /home/rc1/fruit_ws/build/arm_description/resource/arm_description -> /home/rc1/fruit_ws/install/arm_description/share/ament_index/resource_index/packages
+symbolically linking /home/rc1/fruit_ws/build/arm_description/package.xml -> /home/rc1/fruit_ws/install/arm_description/share/arm_description
+creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+symbolically linking /home/rc1/fruit_ws/build/arm_description/launch/display.launch.py -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+symbolically linking /home/rc1/fruit_ws/build/arm_description/launch/gazebo.launch.py -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/launch
+creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/materials.xacro -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.gazebo -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.ros2control -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+symbolically linking /home/rc1/fruit_ws/build/arm_description/urdf/arm.xacro -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/urdf
+creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand1_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link1_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link3_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand2_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/base_link.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/hand0_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link2_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+symbolically linking /home/rc1/fruit_ws/build/arm_description/meshes/link4_1.stl -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/meshes
+creating /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+symbolically linking /home/rc1/fruit_ws/build/arm_description/config/display.rviz -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+symbolically linking /home/rc1/fruit_ws/build/arm_description/config/gazebo.rviz -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config
+symbolically linking /home/rc1/fruit_ws/build/arm_description/config/ros_gz_bridge_gazebo.yaml -> /home/rc1/fruit_ws/install/arm_description/share/arm_description/config

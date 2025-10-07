@@ -1,0 +1,1 @@
+/home/rc1/fruit_ws/src/robot_control_interfaces/topic/SerialData.msg
