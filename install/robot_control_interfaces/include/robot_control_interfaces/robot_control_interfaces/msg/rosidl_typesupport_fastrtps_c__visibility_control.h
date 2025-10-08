@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_typesupport_fastrtps_c/robot_control_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h

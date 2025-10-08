@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/src/arm_description/launch/gazebo.launch.py

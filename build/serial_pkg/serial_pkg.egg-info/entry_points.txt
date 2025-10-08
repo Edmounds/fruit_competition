@@ -1,3 +1,0 @@
-[console_scripts]
-serial_sender = serial_pkg.serial_sender:main
-

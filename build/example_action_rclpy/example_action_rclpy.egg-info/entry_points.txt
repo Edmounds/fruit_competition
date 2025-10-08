@@ -1,4 +1,0 @@
-[console_scripts]
-action_control_02 = example_action_rclpy.action_control_02:main
-action_robot_server = example_action_rclpy.action_robot_server:main
-

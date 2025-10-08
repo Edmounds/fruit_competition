@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_typesupport_fastrtps_cpp/robot_control_interfaces/msg/detail/serial_data__rosidl_typesupport_fastrtps_cpp.hpp

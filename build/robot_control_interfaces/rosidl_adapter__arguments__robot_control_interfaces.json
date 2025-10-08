@@ -1,7 +1,0 @@
-{
-  "package_name": "robot_control_interfaces",
-  "non_idl_tuples": [
-    "/home/rc1/fruit_ws/src/robot_control_interfaces:action/MoveRobot.action",
-    "/home/rc1/fruit_ws/src/robot_control_interfaces:topic/SerialData.msg"
-  ]
-}

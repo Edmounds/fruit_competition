@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/build/robot_control_interfaces/ament_cmake_export_targets/ament_cmake_export_targets-extras.cmake

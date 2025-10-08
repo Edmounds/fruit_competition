@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/build/robot_control_interfaces/rosidl_generator_py/robot_control_interfaces/action/_move_robot_s.c

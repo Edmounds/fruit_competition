@@ -1,1 +1,0 @@
-/home/rc1/fruit_ws/src/fruit_robot_launch/setup.py

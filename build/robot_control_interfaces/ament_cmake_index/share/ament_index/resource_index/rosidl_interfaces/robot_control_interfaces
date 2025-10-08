@@ -1,4 +1,0 @@
-action/MoveRobot.action
-action/MoveRobot.idl
-msg/SerialData.idl
-topic/SerialData.msg
