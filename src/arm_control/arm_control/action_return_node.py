@@ -20,7 +20,7 @@ class SerialActionServer(Node):
         self._action_server = ActionServer(
             self,
             FollowJointTrajectory,
-            action_name,
+            moveit_return_data_action,
             execute_callback=self.execute_callback,
             goal_callback=self.goal_callback,
             handle_accepted_callback=self.handle_accepted_callback,

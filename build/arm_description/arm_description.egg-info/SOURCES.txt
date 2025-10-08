@@ -15,9 +15,6 @@ config/ros_gz_bridge_gazebo.yaml
 launch/display.launch.py
 launch/gazebo.launch.py
 meshes/base_link.stl
-meshes/hand0_1.stl
-meshes/hand1_1.stl
-meshes/hand2_1.stl
 meshes/link1_1.stl
 meshes/link2_1.stl
 meshes/link3_1.stl

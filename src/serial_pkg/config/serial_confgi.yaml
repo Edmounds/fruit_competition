@@ -1,0 +1,5 @@
+serial_server:
+  port: /dev/ttyUSB0
+  baudrate: 115200
+  timeout: 1
+
