@@ -1,0 +1,23 @@
+# 这个名字必须和你在 launch 文件中启动的节点名字匹配
+moveit_control: 
+  ros__parameters:
+      position: #单位米
+        x: -0.2
+        y: 0.0
+        z: 0.3
+
+      orientation: #角度
+        roll: 0.0
+        pitch: 40.0
+        yaw: 0.0
+
+      
+      Tolerances:
+        position: 0.05
+        orientation: 0.05
+   
+
+
+
+
+
