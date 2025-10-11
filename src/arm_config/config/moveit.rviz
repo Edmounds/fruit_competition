@@ -1,13 +1,12 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 0
+    Help Height: 70
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /MotionPlanning1
-        - /Axes1
       Splitter Ratio: 0.5
-    Tree Height: 218
+    Tree Height: 148
   - Class: rviz_common/Help
     Name: Help
   - Class: rviz_common/Views
@@ -47,7 +46,7 @@ Visualization Manager:
       MoveIt_Planning_Attempts: 10
       MoveIt_Planning_Time: 5
       MoveIt_Use_Cartesian_Path: false
-      MoveIt_Use_Constraint_Aware_IK: false
+      MoveIt_Use_Constraint_Aware_IK: true
       MoveIt_Workspace:
         Center:
           X: 0
@@ -168,13 +167,6 @@ Visualization Manager:
         Show Robot Visual: true
       Value: true
       Velocity_Scaling_Factor: 0.1
-    - Class: rviz_default_plugins/Axes
-      Enabled: true
-      Length: 0.5
-      Name: Axes
-      Radius: 0.009999999776482582
-      Reference Frame: base_link
-      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -193,25 +185,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.469738483428955
+      Distance: 2
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
-      Focal Shape Fixed Size: false
+        X: -0.10000000149011612
+        Y: 0.25
+        Z: 0.30000001192092896
+      Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.2703985571861267
+      Pitch: 0.5
       Target Frame: base_link
       Value: Orbit (rviz_default_plugins)
-      Yaw: 5.673572540283203
+      Yaw: -0.6230000257492065
     Saved: ~
 Window Geometry:
   Displays:

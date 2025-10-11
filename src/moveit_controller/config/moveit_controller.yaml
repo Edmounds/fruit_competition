@@ -3,7 +3,7 @@ moveit_control:
   ros__parameters:
       position: #单位米
         x: 0.1
-        y: -0.05
+        y: 0.05
         z: 0.273
 
       orientation: #角度

@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
-
+import os
+import glob
 package_name = 'serial_pkg'
 
 setup(
@@ -10,6 +11,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob.glob('launch/*.launch.py')),
+        (os.path.join('share', package_name, 'config'), glob.glob('config/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,6 +28,11 @@ setup(
     entry_points={
         'console_scripts': [
             'serial_sender = serial_pkg.serial_sender:main',
+            'serial_receiver = serial_pkg.serial_receiver:main',
+            'fruit_arm_driver = serial_pkg.fruit_arm_driver:main',
+            'data_merger_node = serial_pkg.merge_data:main',
+            # 'manual_control_node = serial_pkg.manual_control_node:main',
+            
         ],
     },
 )

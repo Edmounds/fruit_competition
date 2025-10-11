@@ -1,4 +1,4 @@
-# Default initial positions for arm's ros2_control fake system
+# Default initial positions for fruit_arm's ros2_control fake system
 
 initial_positions:
   j1: -1.5707
