@@ -42,14 +42,19 @@ class DataMergerNode(Node):
             10)
         
         self.joint_state_subscriber = self.create_subscription(
-            JointState,
-            '/joint_states', # joint_state_publisher_gui 发布到这个话题
+            ArmControl,
+            '/arm_control_data', # fruit_arm_driver 发布到这个话题
             self.joint_state_callback,
             10)
 
-        self.control_data_publisher = self.create_publisher(SerialData, 'control_data', 10)
+        # self.joint_state_subscriber = self.create_subscription(
+        #     JointState,
+        #     '/joint_states', # joint_state_publisher_gui 发布到这个话题
+        #     self.joint_state_callback,
+        #     10)        
 
-        
+
+        self.control_data_publisher = self.create_publisher(SerialData, 'control_data', 10)
         # --- 定时器 ---
         # 10Hz 发布一次合并后的数据
         # 读取 servo5 参数  的定时器
@@ -61,10 +66,21 @@ class DataMergerNode(Node):
         self.latest_twist = msg
 
     def joint_state_callback(self, msg):
-        # 缓存从 /joint_states 收到的最新数据
-        # 将其转换为 关节名->位置 的字典，方便查找
-        for i, name in enumerate(msg.name):
-            self.latest_joint_states[name] = msg.position[i]
+        """
+        接收从 fruit_arm_driver 发来的 ArmControl 消息（弧度值）
+        
+        Args:
+            msg (ArmControl): 包含4个舵机的弧度值
+        """
+        # 直接存储弧度值，注意 ArmControl 的字段是 servo1-4
+        self.latest_joint_states = {
+            self.joint_map['servo1']: msg.servo1,  # j1
+            self.joint_map['servo2']: msg.servo2,  # j2
+            self.joint_map['servo3']: msg.servo3,  # j3
+            self.joint_map['servo4']: msg.servo4,  # j4
+        }
+        self.get_logger().debug(f"收到机械臂角度(弧度): {self.latest_joint_states}")
+
 
     def get_servo_data(self):
         # servo5 declared as integer; read integer_value
@@ -78,6 +94,8 @@ class DataMergerNode(Node):
        # rad to 0-1000
        # 机械臂零点是0-1000中的500,而在urdf中舵机所在的500表现为0度
        # 240舵机: (-120 to 120)度 -> 0-1000
+       
+       
         if servo_type == '240':
             deg_val = math.degrees(rad_val)
             servo_val = int((deg_val + 120) / 240 * 1000)
@@ -94,40 +112,47 @@ class DataMergerNode(Node):
         
 
     def pack_and_publish_data(self):
-        # --- 1. 数据提取和转换 ---
-        
         # 机器人速度
         linear_x = float(self.latest_twist.linear.x)
         angular_z = float(self.latest_twist.angular.z)
 
-        servo1_val = self.rad_to_servo_val(self.latest_joint_states.get(self.joint_map['servo1'], 0.0), '270')  # 云台舵机是240型
-        servo2_val = self.rad_to_servo_val(self.latest_joint_states.get(self.joint_map['servo2'], 0.0), '240')
-        servo3_val = self.rad_to_servo_val(self.latest_joint_states.get(self.joint_map['servo3'], 0.0), '240')
-        servo4_val = self.rad_to_servo_val(self.latest_joint_states.get(self.joint_map['servo4'], 0.0), '240')
-        # read servo5 as integer parameter
+        # 从字典中获取弧度值，然后转换为舵机脉冲值
+        # 注意：latest_joint_states 的 key 是 'j1', 'j2', 'j3', 'j4'
+        servo1_val = self.rad_to_servo_val(
+            self.latest_joint_states.get('j1', 0.0), '270'
+        )
+        servo2_val = self.rad_to_servo_val(
+            self.latest_joint_states.get('j2', 0.0), '240'
+        )
+        servo3_val = self.rad_to_servo_val(
+            self.latest_joint_states.get('j3', 0.0), '240'
+        )
+        servo4_val = self.rad_to_servo_val(
+            self.latest_joint_states.get('j4', 0.0), '240'
+        )
+        
+        # servo5 和 servo6 从参数读取
         try:
-            servo5_val = int(self.get_parameter('servo5').get_parameter_value().integer_value)  # uint16
-            servo6_val = int(self.get_parameter('servo6').get_parameter_value().integer_value)  # uint16
+            servo5_val = int(self.get_parameter('servo5').get_parameter_value().integer_value)
+            servo6_val = int(self.get_parameter('servo6').get_parameter_value().integer_value)
         except Exception:
-            # fallback to 0 if parameter unexpectedly not integer
             self.get_logger().warning('servo5 or servo6 parameter not integer, using 0')
-            servo5_val = 0  # uint16
-            servo6_val = 0  # uint16
+            servo5_val = 0
+            servo6_val = 0
 
+        # 创建 SerialData 消息（注意这里需要 uint16）
         msg = SerialData()
-        # msg.header.stamp = self.get_clock().now().to_msg()
-        # msg.data = [linear_x, angular_z, servo1_val, servo2_val, servo3_val, servo4_val, servo5_val, servo6_val]
-        msg.servo1 = servo1_val
+        msg.servo1 = servo1_val  # int → uint16 自动转换
         msg.servo2 = servo2_val
         msg.servo3 = servo3_val
         msg.servo4 = servo4_val
         msg.servo5 = servo5_val
         msg.servo6 = servo6_val
-        msg.linear_x = linear_x
+        msg.linear_x = linear_x  # float → float32 自动转换
         msg.angular_z = angular_z
 
         self.control_data_publisher.publish(msg)
-        self.get_logger().info(f"Published SerialData: {msg}")
+        self.get_logger().debug(f"Published SerialData: linear_x={linear_x:.2f}, angular_z={angular_z:.2f}, servos=[{servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}, {servo5_val}, {servo6_val}]")
 
 def main(args=None):
     rclpy.init(args=args)

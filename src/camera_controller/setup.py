@@ -37,6 +37,7 @@ setup(
     entry_points={
         'console_scripts': [
             'fruit_detect = camera_controller.fruit_detect:main',
+            'get_depth = camera_controller.get_depth:main',
         ],
     }
 )

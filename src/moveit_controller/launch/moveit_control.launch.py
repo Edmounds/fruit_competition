@@ -10,7 +10,8 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
-
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     """生成launch描述
@@ -22,6 +23,18 @@ def generate_launch_description():
         'config',
         'moveit_controller.yaml'
     ) 
+
+    fruit_arm_launch_pkg_path = get_package_share_directory('arm_config')
+    fruit_arm_launch_file_path = os.path.join(
+        fruit_arm_launch_pkg_path,
+        'launch',
+        'fruit_arm.launch.py'
+    )
+    
+    # 引入机械臂的launch文件
+    fruit_arm_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([fruit_arm_launch_file_path]),
+    )
 
     # 创建moveit_control节点
     moveit_control = Node(
@@ -36,5 +49,6 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
-        moveit_control
+        # fruit_arm_launch,
+        moveit_control,
     ])

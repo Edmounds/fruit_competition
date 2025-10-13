@@ -39,6 +39,10 @@ class SerialServer(Node):
         self.FRAME_FOOTER = 0x55
         self.FEEDBACK_FUNC_CODE = 0x03
         self.SEND_FUNC_CODE = 0x02
+        self.MIN_FRAME_LENGTH = 25  # 最小完整帧长度
+        self.EXPECTED_PAYLOAD_SIZE = 0x14  # 20 字节数据段
+        self.MAX_BUFFER_SIZE = 1024
+
         
         # 缓冲区
         self.buffer = bytearray()
@@ -67,6 +71,8 @@ class SerialServer(Node):
             # 创建定时器，定期检查串口数据（10ms周期）
             self.receive_timer = self.create_timer(0.01, self.receive_data)
 
+        # 初始化缓冲区大小限制
+        self.MAX_BUFFER_SIZE = 1024  # 最大缓冲区大小
 
     def receive_data(self) -> None:
         """
@@ -101,6 +107,11 @@ class SerialServer(Node):
                 # 更新最后接收时间
                 self.last_receive_time = self.get_clock().now()
                 
+                # 检查缓冲区大小
+                if len(self.buffer) > self.MAX_BUFFER_SIZE:
+                    self.get_logger().warn(f'缓冲区溢出，清空: {len(self.buffer)} 字节')
+                    self.buffer.clear()
+                
                 # 处理缓冲区中的数据
                 self._process_buffer()
                 return True
@@ -132,8 +143,8 @@ class SerialServer(Node):
         
         此方法可处理不同功能码的数据帧，支持发送和接收操作
         """
-        # 首先检查缓冲区是否有足够的数据构成一个最小的合法帧,25
-        while len(self.buffer) >= 25:
+        # 首先检查缓冲区是否有足够的数据构成一个最小的合法帧
+        while len(self.buffer) >= self.MIN_FRAME_LENGTH:
             # 查找帧头
             if self.buffer[0] != self.FRAME_HEADER:
                 # 帧头不匹配，丢弃第一个字节
@@ -200,7 +211,7 @@ class SerialServer(Node):
             return
         
         data_len = frame[2]
-        if data_len != 0x14:  # 20字节
+        if data_len != self.EXPECTED_PAYLOAD_SIZE:
             self.get_logger().warn(f'反馈帧数据长度异常: 预期=20(0x14), 实际={data_len}(0x{data_len:02x})')
             return
 
@@ -419,9 +430,10 @@ class SerialServer(Node):
         if self.ser is not None and self.ser.is_open:
             try:
                 self.ser.close()
-            except:
-                pass
-        
+                self.get_logger().info('已关闭旧串口连接')
+            except Exception as e:
+                self.get_logger().warn(f'关闭串口时出错: {e}')
+            
         # 尝试重连
         return self._connect_serial()
     

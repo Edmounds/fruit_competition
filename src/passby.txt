@@ -1,0 +1,28 @@
+[move_group-3] [INFO] [1760391528.371228771] [moveit.simple_controller_manager.follow_joint_trajectory_controller_handle]: manipulator_controller started execution
+[move_group-3] [INFO] [1760391528.371247748] [moveit.simple_controller_manager.follow_joint_trajectory_controller_handle]: Goal request accepted!
+[fruit_arm_driver-5] [INFO] [1760391528.371515990] [fruit_arm_driver]: Goal accepted, starting execution...
+[fruit_arm_driver-5] [INFO] [1760391528.372871718] [fruit_arm_driver]: Executing goal...
+[fruit_arm_driver-5] [INFO] [1760391528.373339481] [fruit_arm_driver]: Joint j1 (Position: 0.0)
+[fruit_arm_driver-5] [INFO] [1760391528.373753433] [fruit_arm_driver]: Joint j2 (Position: 0.0)
+[fruit_arm_driver-5] [INFO] [1760391528.374166849] [fruit_arm_driver]: Joint j3 (Position: 0.0)
+[fruit_arm_driver-5] [INFO] [1760391528.374620212] [fruit_arm_driver]: Joint j4 (Position: 0.0)
+[fruit_arm_driver-5] [WARN] [1760391528.375120422] [fruit_arm_driver]: Publishing to servos: 0.0, 0.0, 0.0, 0.0
+[fruit_arm_driver-5] [ERROR] [1760391528.375531783] [fruit_arm_driver]: Error raised in execute callback: The 'servo1' field must be of type 'int'
+[fruit_arm_driver-5] Traceback (most recent call last):
+[fruit_arm_driver-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/action/server.py", line 336, in _execute_goal
+[fruit_arm_driver-5]     execute_result = await await_or_execute(execute_callback, goal_handle)
+[fruit_arm_driver-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 107, in await_or_execute
+[fruit_arm_driver-5]     return callback(*args)
+[fruit_arm_driver-5]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/fruit_arm_driver.py", line 154, in execute_callback
+[fruit_arm_driver-5]     msg.servo1 = servo1_val
+[fruit_arm_driver-5]   File "/home/rc1/fruit_ws/install/robot_control_interfaces/local/lib/python3.10/dist-packages/robot_control_interfaces/msg/_arm_control.py", line 139, in servo1
+[fruit_arm_driver-5]     assert \
+[fruit_arm_driver-5] AssertionError: The 'servo1' field must be of type 'int'
+[fruit_arm_driver-5] [WARN] [1760391528.376222008] [fruit_arm_driver]: Goal state not set, assuming aborted. Goal ID: [218 176 174 115  88  55 126  98 182 184 236 200 230 102 163  88]
+[move_group-3] [INFO] [1760391528.377572955] [moveit.simple_controller_manager.follow_joint_trajectory_controller_handle]: Controller 'manipulator_controller' successfully finished
+[move_group-3] [WARN] [1760391528.377625047] [moveit_ros.trajectory_execution_manager]: Controller handle manipulator_controller reports status ABORTED
+[move_group-3] [INFO] [1760391528.377639975] [moveit_ros.trajectory_execution_manager]: Completed trajectory execution with status ABORTED ...
+[move_group-3] [INFO] [1760391528.378171052] [moveit_move_group_default_capabilities.move_action_capability]: Solution found but controller failed during execution
+[rviz2-4] [INFO] [1760391528.379030125] [move_group_interface]: Plan and Execute request aborted
+[rviz2-4] [ERROR] [1760391528.379685398] [move_group_interface]: MoveGroupInterface::move() failed or timeout reached
+
