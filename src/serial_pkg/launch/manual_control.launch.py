@@ -22,7 +22,10 @@ def generate_launch_description():
         Node(
             package='joint_state_publisher_gui',
             executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui'
+            name='joint_state_publisher_gui',
+            # remappings=[
+            #  ('/joint_state', '/joint_state_fake')
+            # ]
         ),
 
         # 启动 robot_state_publisher 节点 (它会订阅 /joint_states 并发布 tf)
@@ -33,7 +36,6 @@ def generate_launch_description():
             parameters=[robot_description]
         ),
  
-
         # Node(
         #     package='serial_pkg',
         #     executable='serial_receiver',
@@ -47,13 +49,13 @@ def generate_launch_description():
             executable='rqt_robot_steering',
             name='rqt_robot_steering_node', 
             output='screen',
-            parameters=[{
-                'default_stamped': True,
-                'default_vx_max': 30.0,
-                'default_vx_min': -30.0,
-                'default_vw_min': -40.0,
-                'default_vw_max': 40.0,
-            }]
+            # parameters=[{
+            #     'default_stamped': True,
+            #     'default_vx_max': 30.0,
+            #     'default_vx_min': -30.0,
+            #     'default_vw_min': -40.0,
+            #     'default_vw_max': 40.0,
+            # }]
         ),
         
         Node(

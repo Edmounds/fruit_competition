@@ -13,8 +13,8 @@ find_package(rosidl_default_generators REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/MoveRobot.action"
   "topic/SerialData.msg"
+  "topic/ArmControl.msg"
 )
 
 if(BUILD_TESTING)

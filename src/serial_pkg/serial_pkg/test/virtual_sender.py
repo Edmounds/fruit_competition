@@ -101,7 +101,6 @@ class Virtual_serial_sender(Node):
     #     pass 
         
 
-
 def main():
     rclpy.init()
     node = Virtual_serial_sender()

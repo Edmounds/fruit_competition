@@ -1,5 +1,5 @@
 serial_server:
-  port: /dev/ttyUSB0
+  port: /dev/serial_ch340
   baudrate: 115200
   timeout: 1
 

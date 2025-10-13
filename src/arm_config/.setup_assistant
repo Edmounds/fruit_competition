@@ -1,13 +1,13 @@
 moveit_setup_assistant_config:
   urdf:
-    package: fruit_arm_description
-    relative_path: urdf/fruit_arm.xacro
+    package: car_description
+    relative_path: urdf/car.xacro
   srdf:
-    relative_path: config/fruit_arm.srdf
+    relative_path: config/car.srdf
   package_settings:
     author_name: edmounds
     author_email: edmounds@163.com
-    generated_timestamp: 1760145060
+    generated_timestamp: 1760343739
   control_xacro:
     command:
       - position

@@ -4,12 +4,24 @@ import os
 
 
 def generate_launch_description():
-    """生成launch描述
-    Returns:
-        LaunchDescription: 包含节点和参数配置的launch描述
-    """
-    # 这里可以添加需要启动的节点
     
-    # moveit_config
-        
+    # tf publisher
+    
+    # lidar
+    
+    # gemini camera
+    
+    # fruit_arm
+    
+    # moveit_control
+    
+    # fruit_detector
+    
+    # cartographer
+    
+    # task_decision
+    
+    # rviz
+    
+     
     return LaunchDescription([])

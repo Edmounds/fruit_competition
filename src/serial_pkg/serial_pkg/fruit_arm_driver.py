@@ -5,7 +5,7 @@ from rclpy.executors import MultiThreadedExecutor
 # 导入Action和相关消息类型
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
-from robot_control_interfaces.msg import SerialData
+from robot_control_interfaces.msg import ArmControl
 from sensor_msgs.msg import JointState 
 import time
 import math
@@ -33,13 +33,14 @@ class FruitArmDriver(Node):
         self.joint_state_publisher_ = self.create_publisher(JointState, 'joint_states', 10)
         
         #-----------------------Topic发布器-----------------------
-        self.publisher_ = self.create_publisher(SerialData, 'control_data', 10)
+        self.control_data_publisher_ = self.create_publisher(ArmControl, 'control_data', 10)
 
         #-----------------------读取串口舵机角度-------------------
         # self.subscriber_ = self.create_subscription(SerialData, 'feedback_data', self.feedback_callback, 10)
 
         #-----------------------timer-------------------
-        self.timer = self.create_timer(1.0, self.timer_callback)
+        # 以20Hz频率发布joint_states，用于RViz显示（使用命令值作为反馈）
+        self.timer = self.create_timer(0.05, self.timer_callback)
         
         # 存储最新的关节反馈值
         self.latest_joint_feedback = [0.0, 0.0, 0.0, 0.0]
@@ -115,7 +116,6 @@ class FruitArmDriver(Node):
             # 将弧度转换为舵机脉冲值
             # MoveIt传来的positions顺序与joint_names一一对应
             # 我们需要根据joint_names找到对应的舵机并转换
-            
             servo_vals = {}
             joint_map = {
                 'j1': 'servo1',
@@ -124,16 +124,15 @@ class FruitArmDriver(Node):
                 'j4': 'servo4',
             }
 
+            #直接发布原始数据话题
             for i, joint_name in enumerate(trajectory.joint_names):
                 servo_name = joint_map.get(joint_name)
                 position = point.positions[i]
-                if servo_name == 'servo1': # 270度
-                    servo_vals[servo_name] = self.radians_to_servo_pulse(position, 270)
-                elif servo_name in ['servo2', 'servo3', 'servo4']: # 240度
-                    servo_vals[servo_name] = self.radians_to_servo_pulse(position, 240)
-
-                servo_vals["servo5"] = 1
-
+                
+                servo_vals[servo_name] = position
+                self.get_logger().info(f"Joint {joint_name} (Position: {position})")
+ 
+                
             # --- 计算延时 ---
             # 计算当前点与上一个点之间的时间差，并延时
             current_point_time = point.time_from_start.sec + point.time_from_start.nanosec * 1e-9
@@ -142,38 +141,28 @@ class FruitArmDriver(Node):
                 time.sleep(sleep_duration)
             last_point_time = current_point_time
 
-            # 使用get获取值，如果轨迹中没有某个舵机，则保持其当前值（或设为默认值）
-            # 注意：这里简化为0，实际应用可能需要从一个状态变量中获取
             servo1_val = servo_vals.get('servo1', 0)
             servo2_val = servo_vals.get('servo2', 0)
             servo3_val = servo_vals.get('servo3', 0)
             servo4_val = servo_vals.get('servo4', 0)
-            servo5_val = servo_vals.get('servo5', 0)
 
-            self.get_logger().warn(f"Publishing to servos: {servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}, {servo5_val}")
+            self.get_logger().warn(f"Publishing to servos: {servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}")
 
-            # 发送串口数据
-            msg = SerialData()
-            msg.linear_x = 0.0
-            msg.angular_z = 0.0
 
+            # 发布到串口舵机控制话题
+            msg = ArmControl()
             msg.servo1 = servo1_val
             msg.servo2 = servo2_val
             msg.servo3 = servo3_val
             msg.servo4 = servo4_val
-            msg.servo5 = servo5_val
 
+            self.control_data_publisher_.publish(msg)
+            self.get_logger().info(f"Published to control_data: {msg}")
             
-            self.publisher_.publish(msg)
-            self.get_logger().info(f"Published SerialData: {msg}")
+            # 更新关节状态反馈（使用命令值作为反馈）
+            with self.feedback_lock:
+                self.latest_joint_feedback = [servo1_val, servo2_val, servo3_val, servo4_val]
             
-            # # (可选) 发布反馈信息
-            # feedback_msg = FollowJointTrajectory.Feedback()
-            # feedback_msg.joint_names = trajectory.joint_names
-            # feedback_msg.actual = point # 简化处理，实际应发回真实编码器值
-            # goal_handle.publish_feedback(feedback_msg)
-
-
         # 所有点都执行完毕
         goal_handle.succeed()
         self.get_logger().info('Goal execution succeeded!')
@@ -196,56 +185,7 @@ class FruitArmDriver(Node):
        self.joint_state_publisher_.publish(msg)
        self.get_logger().debug(f"Published fake joint states for RViz: {positions}")
     
-    # --- 辅助函数 ---
-    
-    def servo_pulse_to_radians(self, pulse, total_degrees):
-        """
-        将舵机脉冲值 (0-1000) 转换为弧度值。
-        
-        Args:
-            pulse (int): 舵机脉冲值, 范围 0-1000.
-            total_degrees (int): 舵机总行程角度 (例如 180, 270).
-        
-        Returns:
-            float: 对应的弧度值.
-        """
-        # 将脉冲值从 [0, 1000] 映射到 [0, total_degrees]
-        degrees = (pulse / 1000.0) * total_degrees
-        
-        # 将角度从行程中心（total_degrees / 2）平移到0点
-        centered_degrees = degrees - (total_degrees / 2.0)
-        
-        # 将角度转换为弧度
-        return math.radians(centered_degrees)
 
-    def radians_to_servo_pulse(self, rad, total_degrees):
-        """
-        将弧度值转换为舵机脉冲值 (0-1000)。
-        
-        Args:
-            rad (float): 弧度值.
-            total_degrees (int): 舵机总行程角度 (例如 180, 270).
-            
-        Returns:
-            int: 对应的舵机脉冲值 (0-1000).
-        """
-        # 将弧度转换为角度
-        degrees = math.degrees(rad)
-        
-        # 计算总弧度范围的一半
-        half_range_rad = math.radians(total_degrees / 2.0)
-        
-        # 限制输入弧度在舵机范围内
-        rad = max(-half_range_rad, min(half_range_rad, rad))
-        
-        # 将弧度值从 [-half_range_rad, half_range_rad] 映射到 [0, 1000]
-        # 首先，将值平移到 [0, 2 * half_range_rad]
-        # 然后，归一化到 [0, 1]
-        # 最后，缩放到 [0, 1000]
-        pulse = (rad + half_range_rad) / (2 * half_range_rad) * 1000.0
-        
-        # 限制范围并转换为整数
-        return int(max(0, min(1000, pulse)))
 
 def main(args=None):
     rclpy.init(args=args)

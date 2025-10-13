@@ -3,6 +3,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
 from robot_control_interfaces.msg import SerialData
+from robot_control_interfaces.msg import ArmControl
 import math
 
 class DataMergerNode(Node):
@@ -18,6 +19,7 @@ class DataMergerNode(Node):
         self.declare_parameter('joint_map.servo4', 'j4')
         # servo5 should be an integer (uint16). Declare default as int 0.
         self.declare_parameter('servo5', 0)
+        self.declare_parameter('servo6', 0)  
 
         self.joint_map = {
             'servo1': self.get_parameter('joint_map.servo1').get_parameter_value().string_value,
@@ -51,7 +53,7 @@ class DataMergerNode(Node):
         # --- 定时器 ---
         # 10Hz 发布一次合并后的数据
         # 读取 servo5 参数  的定时器
-        self.timer1 = self.create_timer(0.1, self.get_servo5_data) 
+        self.timer1 = self.create_timer(0.1, self.get_servo_data)
         self.timer2 = self.create_timer(0.1, self.pack_and_publish_data) 
 
     def twist_callback(self, msg):
@@ -64,10 +66,12 @@ class DataMergerNode(Node):
         for i, name in enumerate(msg.name):
             self.latest_joint_states[name] = msg.position[i]
 
-    def get_servo5_data(self):
+    def get_servo_data(self):
         # servo5 declared as integer; read integer_value
         servo5_data = self.get_parameter('servo5').get_parameter_value().integer_value  # uint16
+        servo6_data = self.get_parameter('servo6').get_parameter_value().integer_value  # uint16
         self.get_logger().info(f"Servo 5 Data: {servo5_data}")
+        self.get_logger().info(f"Servo 6 Data: {servo6_data}")
 
     def rad_to_servo_val(self, rad_val, servo_type):
        
@@ -103,12 +107,13 @@ class DataMergerNode(Node):
         # read servo5 as integer parameter
         try:
             servo5_val = int(self.get_parameter('servo5').get_parameter_value().integer_value)  # uint16
+            servo6_val = int(self.get_parameter('servo6').get_parameter_value().integer_value)  # uint16
         except Exception:
             # fallback to 0 if parameter unexpectedly not integer
-            self.get_logger().warning('servo5 parameter not integer, using 0')
+            self.get_logger().warning('servo5 or servo6 parameter not integer, using 0')
             servo5_val = 0  # uint16
-        servo6_val = 0  # 如果有第六个舵机，可以在这里添加
-        
+            servo6_val = 0  # uint16
+
         msg = SerialData()
         # msg.header.stamp = self.get_clock().now().to_msg()
         # msg.data = [linear_x, angular_z, servo1_val, servo2_val, servo3_val, servo4_val, servo5_val, servo6_val]

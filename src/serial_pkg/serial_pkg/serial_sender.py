@@ -10,7 +10,7 @@ def main(args=None):
     rclpy.init(args=args)
     
     # 创建节点
-    node = SerialServer(port='/dev/ttyUSB0', baudrate=115200, type='sender')
+    node = SerialServer(port='/dev/serial_ch340', baudrate=115200, type='sender')
     
     # 使用多线程执行器
     executor = MultiThreadedExecutor()
@@ -24,3 +24,7 @@ def main(args=None):
     finally:
         node.destroy_node()
         rclpy.shutdown()
+
+        
+if __name__ == '__main__':
+    main()
