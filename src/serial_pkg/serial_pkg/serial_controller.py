@@ -74,6 +74,111 @@ class SerialServer(Node):
         # 初始化缓冲区大小限制
         self.MAX_BUFFER_SIZE = 1024  # 最大缓冲区大小
 
+
+#==================================================================================发送部分开始==================================================================================
+
+
+    def _prepare_send_frame(self, linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6):
+        """
+        准备发送帧 (正确规范)
+        
+        Args:
+            linear_x: 线速度
+            angular_z: 角速度
+            servo1-servo5: 舵机控制值
+            servo6: 开关门控制值 (0/1)
+            
+        Returns:
+            构建好的完整数据帧
+        """
+        # 帧头
+        tx_buffer = bytearray()
+        tx_buffer.append(self.FRAME_HEADER)
+        
+        # 功能码
+        tx_buffer.append(self.SEND_FUNC_CODE)
+        
+        tx_buffer.append(0x14)
+        
+        # 打包数据（小端模式）：linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6
+        tx_buffer.extend(struct.pack('<ff', linear_x, angular_z))
+        tx_buffer.extend(struct.pack('<HHHHHH', servo1, servo2, servo3, servo4, servo5, servo6))
+        
+        # 计算校验和：从功能码开始的所有数据 (功能码 + 数据长度 + payload = 22字节)
+        data_to_checksum = tx_buffer[1:]
+        checksum = sum(data_to_checksum) & 0xFF
+        tx_buffer.append(checksum)
+        
+        # 帧尾
+        tx_buffer.append(self.FRAME_FOOTER)
+        
+        return tx_buffer
+    
+    def send_data(self, serial_data: SerialData) -> None:
+        """
+        打包并发送控制数据到下位机（ROS回调函数接口）
+        
+        Args:
+            serial_data: 包含线速度、角速度和舵机控制值的SerialData消息
+        """
+        self._send_frame(serial_data)
+        
+    def _send_frame(self, serial_data: SerialData) -> bool:
+        """
+        执行实际的串口数据发送
+        
+        Args:
+            serial_data: 包含线速度、角速度和舵机控制值的SerialData消息
+            
+        Returns:
+            bool: 是否成功发送数据
+        """
+        # 检查连接状态
+        if not self._check_connection():
+            return False
+        
+        # 类型断言：_check_connection 返回 True 时，self.ser 必定不为 None
+        assert self.ser is not None
+            
+        try:
+            # 从消息中提取数据
+            linear_x = serial_data.linear_x
+            angular_z = serial_data.angular_z
+            servo1 = int(serial_data.servo1)
+            servo2 = int(serial_data.servo2)
+            servo3 = int(serial_data.servo3)
+            servo4 = int(serial_data.servo4)
+            servo5 = int(serial_data.servo5)
+            servo6 = int(serial_data.servo6)
+            
+            # 构建并发送帧
+            frame = self._prepare_send_frame(linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6)
+            
+            bytes_written = self.ser.write(frame)
+            
+            if bytes_written != len(frame):
+                self.get_logger().warn(f'数据发送不完整：预期发送 {len(frame)} 字节，实际发送 {bytes_written} 字节')
+                return False
+                
+            self.get_logger().info(f'发送数据: linear_x={linear_x}, angular_z={angular_z}, '
+                            f'舵机=[{servo1}, {servo2}, {servo3}, {servo4}, {servo5}], 开关门={servo6}')
+            return True
+            
+        except serial.SerialTimeoutException:
+            self.get_logger().error('发送数据超时')
+            return False
+        except serial.SerialException as e:
+            self.get_logger().error(f'串口错误: {e}')
+            # 尝试重连
+            return self._try_reconnect()
+        except Exception as e:
+            self.get_logger().error(f"打包并发送数据时出错: {e}")
+            return False
+                    
+        
+    #==================================================================================发送部分结束==================================================================================
+    
+
     def receive_data(self) -> None:
         """
         接收串口数据并解析（ROS回调函数接口）
@@ -248,114 +353,7 @@ class SerialServer(Node):
             self.get_logger().error(f'解包数据帧时出错: {e}, payload_len={len(payload)}')
         except Exception as e:
             self.get_logger().error(f'处理反馈帧时发生未知错误: {e}')
-
-    
-    #==================================================================================发送部分开始==================================================================================
-
-    def _send_frame(self, serial_data: SerialData) -> bool:
-        """
-        执行实际的串口数据发送
         
-        Args:
-            serial_data: 包含线速度、角速度和舵机控制值的SerialData消息
-            
-        Returns:
-            bool: 是否成功发送数据
-        """
-        # 检查连接状态
-        if not self._check_connection():
-            return False
-        
-        # 类型断言：_check_connection 返回 True 时，self.ser 必定不为 None
-        assert self.ser is not None
-            
-        try:
-            # 从消息中提取数据
-            linear_x = serial_data.linear_x
-            angular_z = serial_data.angular_z
-            servo1 = int(serial_data.servo1)
-            servo2 = int(serial_data.servo2)
-            servo3 = int(serial_data.servo3)
-            servo4 = int(serial_data.servo4)
-            servo5 = int(serial_data.servo5)
-            servo6 = int(serial_data.servo6)
-            
-            # 构建并发送帧
-            frame = self._prepare_send_frame(linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6)
-            
-            bytes_written = self.ser.write(frame)
-            
-            if bytes_written != len(frame):
-                self.get_logger().warn(f'数据发送不完整：预期发送 {len(frame)} 字节，实际发送 {bytes_written} 字节')
-                return False
-                
-            self.get_logger().info(f'发送数据: linear_x={linear_x}, angular_z={angular_z}, '
-                               f'舵机=[{servo1}, {servo2}, {servo3}, {servo4}, {servo5}], 开关门={servo6}')
-            return True
-            
-        except serial.SerialTimeoutException:
-            self.get_logger().error('发送数据超时')
-            return False
-        except serial.SerialException as e:
-            self.get_logger().error(f'串口错误: {e}')
-            # 尝试重连
-            return self._try_reconnect()
-        except Exception as e:
-            self.get_logger().error(f"打包并发送数据时出错: {e}")
-            return False
-            
-    def _prepare_send_frame(self, linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6):
-        """
-        准备发送帧 (正确规范)
-        
-        Args:
-            linear_x: 线速度
-            angular_z: 角速度
-            servo1-servo5: 舵机控制值
-            servo6: 开关门控制值 (0/1)
-            
-        Returns:
-            构建好的完整数据帧
-        """
-        # 帧头
-        tx_buffer = bytearray()
-        tx_buffer.append(self.FRAME_HEADER)
-        
-        # 功能码
-        tx_buffer.append(self.SEND_FUNC_CODE)
-        
-        tx_buffer.append(0x14)
-        
-        # 打包数据（小端模式）：linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6
-        tx_buffer.extend(struct.pack('<ff', linear_x, angular_z))
-        tx_buffer.extend(struct.pack('<HHHHHH', servo1, servo2, servo3, servo4, servo5, servo6))
-        
-        # 计算校验和：从功能码开始的所有数据 (功能码 + 数据长度 + payload = 22字节)
-        data_to_checksum = tx_buffer[1:]
-        checksum = sum(data_to_checksum) & 0xFF
-        tx_buffer.append(checksum)
-        
-        # 帧尾
-        tx_buffer.append(self.FRAME_FOOTER)
-        
-        return tx_buffer
-    
-    def send_data(self, serial_data: SerialData) -> None:
-        """
-        打包并发送控制数据到下位机（ROS回调函数接口）
-        
-        Args:
-            serial_data: 包含线速度、角速度和舵机控制值的SerialData消息
-        """
-        self._send_frame(serial_data)
-        
-        
-        
-    #==================================================================================发送部分结束==================================================================================
-    
-    
-    
-    
     #==================================================================================辅助函数==================================================================================
     def _calculate_checksum(self, data):
         """

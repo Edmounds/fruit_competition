@@ -3,8 +3,9 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
 from robot_control_interfaces.msg import SerialData
-from robot_control_interfaces.msg import ArmControl
 import math
+from std_srvs.srv import Trigger
+from rclpy.parameter import Parameter
 
 class DataMergerNode(Node):
     def __init__(self):
@@ -41,17 +42,12 @@ class DataMergerNode(Node):
             self.twist_callback,
             10)
         
+        # 订阅机械臂关节状态（JointState 标准消息）
         self.joint_state_subscriber = self.create_subscription(
-            ArmControl,
-            '/arm_control_data', # fruit_arm_driver 发布到这个话题
+            JointState,
+            '/arm_control_data',  # fruit_arm_driver 发布到这个话题
             self.joint_state_callback,
-            10)
-
-        # self.joint_state_subscriber = self.create_subscription(
-        #     JointState,
-        #     '/joint_states', # joint_state_publisher_gui 发布到这个话题
-        #     self.joint_state_callback,
-        #     10)        
+            10)        
 
 
         self.control_data_publisher = self.create_publisher(SerialData, 'control_data', 10)
@@ -60,6 +56,21 @@ class DataMergerNode(Node):
         # 读取 servo5 参数  的定时器
         self.timer1 = self.create_timer(0.1, self.get_servo_data)
         self.timer2 = self.create_timer(0.1, self.pack_and_publish_data) 
+        
+        self.last_servo5 = None
+        self.last_servo6 = None
+
+        # --- 服务 ---
+        self.toggle_servo5_service = self.create_service(
+            Trigger,
+            'toggle_servo5',
+            self.toggle_servo5_callback
+        )
+        self.toggle_servo6_service = self.create_service(
+            Trigger,
+            'toggle_servo6',
+            self.toggle_servo6_callback
+        )
 
     def twist_callback(self, msg):
         # 缓存从 /cmd_vel 收到的最新数据
@@ -67,35 +78,77 @@ class DataMergerNode(Node):
 
     def joint_state_callback(self, msg):
         """
-        接收从 fruit_arm_driver 发来的 ArmControl 消息（弧度值）
+        接收从 fruit_arm_driver 发来的 JointState 消息（弧度值）
         
         Args:
-            msg (ArmControl): 包含4个舵机的弧度值
+            msg (JointState): 标准 JointState 消息，包含 name 和 position 数组
         """
-        # 直接存储弧度值，注意 ArmControl 的字段是 servo1-4
-        self.latest_joint_states = {
-            self.joint_map['servo1']: msg.servo1,  # j1
-            self.joint_map['servo2']: msg.servo2,  # j2
-            self.joint_map['servo3']: msg.servo3,  # j3
-            self.joint_map['servo4']: msg.servo4,  # j4
-        }
+        # 解析 JointState 消息：遍历 name 和 position 数组
+        for i, joint_name in enumerate(msg.name):
+            if i < len(msg.position):
+                self.latest_joint_states[joint_name] = msg.position[i]
+        
         self.get_logger().debug(f"收到机械臂角度(弧度): {self.latest_joint_states}")
 
+
+    def toggle_servo5_callback(self, request, response):
+        """
+        Toggle servo5 开关
+        
+        Args:
+            request (Trigger.Request): 标准Trigger请求
+            response (Trigger.Response): 标准Trigger响应
+            
+        Returns:
+            Trigger.Response: 成功响应
+        """
+        current_val = self.get_parameter('servo5').get_parameter_value().integer_value
+        new_val = 1 if current_val == 0 else 0
+        self.set_parameters([Parameter('servo5', Parameter.Type.INTEGER, new_val)])
+        response.success = True
+        response.message = f"Servo5 toggled to {new_val}"
+        self.get_logger().info(f"Servo5 toggled to {new_val}")
+        return response
+
+    def toggle_servo6_callback(self, request, response):
+        """
+        Toggle servo6 开关
+        
+        Args:
+            request (Trigger.Request): 标准Trigger请求
+            response (Trigger.Response): 标准Trigger响应
+            
+        Returns:
+            Trigger.Response: 成功响应
+        """
+        current_val = self.get_parameter('servo6').get_parameter_value().integer_value
+        new_val = 1 if current_val == 0 else 0
+        self.set_parameters([Parameter('servo6', Parameter.Type.INTEGER, new_val)])
+        response.success = True
+        response.message = f"Servo6 toggled to {new_val}"
+        self.get_logger().info(f"Servo6 toggled to {new_val}")
+        return response
 
     def get_servo_data(self):
         # servo5 declared as integer; read integer_value
         servo5_data = self.get_parameter('servo5').get_parameter_value().integer_value  # uint16
         servo6_data = self.get_parameter('servo6').get_parameter_value().integer_value  # uint16
-        self.get_logger().info(f"Servo 5 Data: {servo5_data}")
-        self.get_logger().info(f"Servo 6 Data: {servo6_data}")
+        
+        #设置只有在被改变之后发info日志
+        if servo5_data != self.last_servo5 or servo6_data != self.last_servo6:
+            self.last_servo5 = servo5_data
+            self.last_servo6 = servo6_data
+            self.get_logger().info(f"Servo 5 Data: {servo5_data}")
+            self.get_logger().info(f"Servo 6 Data: {servo6_data}")
+        
+        # self.get_logger().info(f"Servo 5 Data: {servo5_data}")
+        # self.get_logger().info(f"Servo 6 Data: {servo6_data}")
 
     def rad_to_servo_val(self, rad_val, servo_type):
        
        # rad to 0-1000
        # 机械臂零点是0-1000中的500,而在urdf中舵机所在的500表现为0度
        # 240舵机: (-120 to 120)度 -> 0-1000
-       
-       
         if servo_type == '240':
             deg_val = math.degrees(rad_val)
             servo_val = int((deg_val + 120) / 240 * 1000)

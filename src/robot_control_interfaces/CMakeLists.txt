@@ -14,7 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "topic/SerialData.msg"
-  "topic/ArmControl.msg"
+  # "topic/ArmControl.msg"
 )
 
 if(BUILD_TESTING)

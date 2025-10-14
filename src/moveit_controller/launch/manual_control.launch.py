@@ -8,9 +8,9 @@ from launch.substitutions import Command
 def generate_launch_description():
 
     urdf_path = os.path.join(
-    get_package_share_directory('fruit_arm_description'),
+    get_package_share_directory('car_description'),
     'urdf',
-    'fruit_arm.xacro'
+    'car.xacro'
     )
     
         # 从 URDF 加载机器人描述
@@ -23,9 +23,13 @@ def generate_launch_description():
             package='joint_state_publisher_gui',
             executable='joint_state_publisher_gui',
             name='joint_state_publisher_gui',
-            # remappings=[
-            #  ('/joint_state', '/joint_state_fake')
-            # ]
+            remappings=[
+                ('/joint_states', '/arm_control_data')  # 重映射到 /arm_control_data
+            ],
+            parameters=[{
+                'source_list': ['j1', 'j2', 'j3', 'j4']  # 只控制这四个关节
+            }],
+            output='screen',
         ),
 
         # 启动 robot_state_publisher 节点 (它会订阅 /joint_states 并发布 tf)
@@ -65,10 +69,11 @@ def generate_launch_description():
             output='screen',
         ),
 
-        # Node(
-        #     package='serial_pkg',
-        #     executable='manual_control_node',
-        #     name='manual_control_node',
-        #     output='screen', 
-        # ),
+        Node(
+            package='serial_pkg',
+            executable='serial_sender',
+            name='serial_sender',
+            output='screen', 
+            parameters=[{'--args': '--ros-args --log-level debug'}]
+        ),
     ])

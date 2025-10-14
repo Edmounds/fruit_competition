@@ -5,7 +5,6 @@ from rclpy.executors import MultiThreadedExecutor
 # 导入Action和相关消息类型
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
-from robot_control_interfaces.msg import ArmControl
 from sensor_msgs.msg import JointState 
 import time
 import math
@@ -30,10 +29,11 @@ class FruitArmDriver(Node):
         
 
         # ------------------- Joint State Publisher -------------------
+        # 发布到 /joint_states 用于 RViz 显示
         self.joint_state_publisher_ = self.create_publisher(JointState, 'joint_states', 10)
         
-        #-----------------------Topic发布器-----------------------
-        self.control_data_publisher_ = self.create_publisher(ArmControl, 'arm_control_data', 10)
+        # 发布到 /arm_control_data 用于串口控制（统一使用 JointState）
+        self.control_data_publisher_ = self.create_publisher(JointState, 'arm_control_data', 10)
 
         #-----------------------读取串口舵机角度-------------------
         # 注意：下位机当前不提供舵机角度反馈，使用命令值作为状态反馈
@@ -48,13 +48,21 @@ class FruitArmDriver(Node):
         self.latest_joint_feedback = [0.0, 0.0, 0.0, 0.0]  # 初始化为中位
         self.feedback_lock = threading.Lock()
         
-        self.get_logger().warn('⚠️ 下位机未提供舵机反馈，使用命令值作为状态！请确保舵机能准确执行命令。')
+        self.get_logger().warn('使用命令值作为状态！请确保舵机能准确执行命令。')
         
-        self.joint_names = ['j1', 'j2', 'j3', 'j4']
+        # 机械臂关节
+        self.arm_joint_names = ['j1', 'j2', 'j3', 'j4']
+        # 轮子关节（添加这些以消除MoveIt警告）
+        self.wheel_joint_names = ['r1', 'r2', 'r4']
+        self.wheel_joint_positions = [0.0, 0.0, 0.0]  # 轮子关节固定为0
+        
+        # 完整的关节列表（机械臂+轮子）
+        self.all_joint_names = self.arm_joint_names + self.wheel_joint_names
+        self.all_joint_positions = self.latest_joint_feedback + self.wheel_joint_positions
         
         # 立即发布初始状态，让MoveIt知道机器人的起始位置
-        self.publish_joint_states(self.joint_names, self.latest_joint_feedback)
-        self.get_logger().info(f'已发布初始关节状态: {self.latest_joint_feedback}') 
+        self.publish_joint_states(self.all_joint_names, self.all_joint_positions)
+        self.get_logger().info(f'已发布初始关节状态（包含轮子）: {self.all_joint_positions}') 
         
     
     # def feedback_callback(self, msg):
@@ -75,11 +83,13 @@ class FruitArmDriver(Node):
     #     self.get_logger().debug(f"收到舵机反馈: {self.latest_joint_feedback}")
     
     def timer_callback(self):
-        # 定时发布当前关节状态
+        # 定时发布当前关节状态（包含机械臂和轮子）
         with self.feedback_lock:
-            joints_state = self.latest_joint_feedback.copy()  # 使用最新接收到的关节状态
-
-        self.publish_joint_states(self.joint_names, joints_state)
+            arm_joints_state = self.latest_joint_feedback.copy()  # 使用最新接收到的关节状态
+        
+        # 组合机械臂和轮子的关节状态
+        all_positions = arm_joints_state + self.wheel_joint_positions
+        self.publish_joint_states(self.all_joint_names, all_positions)
 
     # --- Action Server 回调函数 ---
     def goal_callback(self, goal_request):
@@ -123,9 +133,6 @@ class FruitArmDriver(Node):
                 self.get_logger().info('Goal canceled!')
                 return FollowJointTrajectory.Result()
 
-            # 将弧度转换为舵机脉冲值
-            # MoveIt传来的positions顺序与joint_names一一对应
-            # 我们需要根据joint_names找到对应的舵机并转换
             servo_vals = {}
             joint_map = {
                 'j1': 'servo1',
@@ -140,9 +147,8 @@ class FruitArmDriver(Node):
                 position = point.positions[i]
                 
                 servo_vals[servo_name] = position
-                self.get_logger().info(f"Joint {joint_name} (Position: {position})")
- 
-                
+                self.get_logger().debug(f"Joint {joint_name} (Position: {position})")
+
             # --- 计算延时 ---
             # 计算当前点与上一个点之间的时间差，并延时
             current_point_time = point.time_from_start.sec + point.time_from_start.nanosec * 1e-9
@@ -159,24 +165,23 @@ class FruitArmDriver(Node):
             # 安全检查：检测单步运动幅度是否过大
             with self.feedback_lock:
                 prev_positions = self.latest_joint_feedback.copy()
-            max_step = max(abs(servo1_val - prev_positions[0]),
+                max_step = max(abs(servo1_val - prev_positions[0]),
                           abs(servo2_val - prev_positions[1]),
                           abs(servo3_val - prev_positions[2]),
                           abs(servo4_val - prev_positions[3]))
-            if max_step > 900:  # 超过90度（900脉冲）视为异常
-                self.get_logger().warn(f'⚠️ 检测到大幅度运动！最大步进: {max_step:.1f} 脉冲 ({max_step/10:.1f}度)')
+            if max_step > 90: # 90度阈值
+                self.get_logger().warn(f'检测到大幅度运动！最大步进: ({max_step:.1f}度)')
 
-            self.get_logger().info(f"Publishing to servos (pulse 0-3600): {servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}")
+            self.get_logger().debug(f"Publishing to servos : {servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}")
 
-            # 发布到串口舵机控制话题
-            msg = ArmControl()
-            msg.servo1 = servo1_val
-            msg.servo2 = servo2_val
-            msg.servo3 = servo3_val
-            msg.servo4 = servo4_val
+            # 发布到串口舵机控制话题（使用 JointState）
+            msg = JointState()
+            msg.header.stamp = self.get_clock().now().to_msg()
+            msg.name = ['j1', 'j2', 'j3', 'j4']
+            msg.position = [servo1_val, servo2_val, servo3_val, servo4_val]
 
             self.control_data_publisher_.publish(msg)
-            self.get_logger().info(f"Published to control_data: {msg}")
+            # self.get_logger().info(f"Published to control_data: {msg}")
             
             # 更新关节状态反馈（使用命令值作为反馈）
             with self.feedback_lock:

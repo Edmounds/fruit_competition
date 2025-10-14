@@ -26,3 +26,112 @@
 [rviz2-4] [INFO] [1760391528.379030125] [move_group_interface]: Plan and Execute request aborted
 [rviz2-4] [ERROR] [1760391528.379685398] [move_group_interface]: MoveGroupInterface::move() failed or timeout reached
 
+
+
+[serial_sender-5] [INFO] [1760404019.633647166] [serial_sender]: 串口 /dev/serial_ch340 已打开，波特率 115200
+[serial_sender-5] Traceback (most recent call last):
+[serial_sender-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/import_type_support_impl.py", line 46, in import_type_support
+[serial_sender-5]     return importlib.import_module(module_name, package=pkg_name)
+[serial_sender-5]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[serial_sender-5]     return _bootstrap._gcd_import(name[level:], package, level)
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 674, in _load_unlocked
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 571, in module_from_spec
+[serial_sender-5]   File "<frozen importlib._bootstrap_external>", line 1176, in create_module
+[serial_sender-5]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[serial_sender-5] ImportError: /home/rc1/fruit_ws/install/robot_control_interfaces/local/lib/python3.10/dist-packages/robot_control_interfaces/robot_control_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so: undefined symbol: robot_control_interfaces__msg__arm_control__convert_to_py
+[serial_sender-5] 
+[serial_sender-5] During handling of the above exception, another exception occurred:
+[serial_sender-5] 
+[serial_sender-5] Traceback (most recent call last):
+[serial_sender-5]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/serial_sender", line 33, in <module>
+[serial_sender-5]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'serial_sender')())
+[serial_sender-5]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/serial_sender.py", line 13, in main
+[serial_sender-5]     node = SerialServer(port='/dev/serial_ch340', baudrate=115200, type='sender')
+[serial_sender-5]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/serial_controller.py", line 56, in __init__
+[serial_sender-5]     self.arm_subscription = self.create_subscription(
+[serial_sender-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1374, in create_subscription
+[serial_sender-5]     check_is_valid_msg_type(msg_type)
+[serial_sender-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/type_support.py", line 35, in check_is_valid_msg_type
+[serial_sender-5]     check_for_type_support(msg_type)
+[serial_sender-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/type_support.py", line 29, in check_for_type_support
+[serial_sender-5]     msg_or_srv_type.__class__.__import_type_support__()
+[serial_sender-5]   File "/home/rc1/fruit_ws/install/robot_control_interfaces/local/lib/python3.10/dist-packages/robot_control_interfaces/msg/_serial_data.py", line 31, in __import_type_support__
+[serial_sender-5]     module = import_type_support('robot_control_interfaces')
+[serial_sender-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/import_type_support_impl.py", line 48, in import_type_support
+[serial_sender-5]     raise UnsupportedTypeSupport(pkg_name)
+[serial_sender-5] rosidl_generator_py.import_type_support_impl.UnsupportedTypeSupport: Could not import 'rosidl_typesupport_c' for package 'robot_control_interfaces'
+[data_merger_node-4] [INFO] [1760404019.765800624] [data_merger_node]: Joint mapping: {'servo1': 'j1', 'servo2': 'j2', 'servo3': 'j3', 'servo4': 'j4'}
+[data_merger_node-4] Traceback (most recent call last):
+[data_merger_node-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/import_type_support_impl.py", line 46, in import_type_support
+[data_merger_node-4]     return importlib.import_module(module_name, package=pkg_name)
+[data_merger_node-4]   File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+[data_merger_node-4]     return _bootstrap._gcd_import(name[level:], package, level)
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 674, in _load_unlocked
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 571, in module_from_spec
+[data_merger_node-4]   File "<frozen importlib._bootstrap_external>", line 1176, in create_module
+[data_merger_node-4]   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+[data_merger_node-4] ImportError: /home/rc1/fruit_ws/install/robot_control_interfaces/local/lib/python3.10/dist-packages/robot_control_interfaces/robot_control_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so: undefined symbol: robot_control_interfaces__msg__arm_control__convert_to_py
+[data_merger_node-4] 
+[data_merger_node-4] During handling of the above exception, another exception occurred:
+[data_merger_node-4] 
+[data_merger_node-4] Traceback (most recent call last):
+[data_merger_node-4]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node", line 33, in <module>
+[data_merger_node-4]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'data_merger_node')())
+[data_merger_node-4]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/merge_data.py", line 160, in main
+[data_merger_node-4]     node = DataMergerNode()
+[data_merger_node-4]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/merge_data.py", line 51, in __init__
+[data_merger_node-4]     self.control_data_publisher = self.create_publisher(SerialData, 'control_data', 10)
+[data_merger_node-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1297, in create_publisher
+[data_merger_node-4]     check_is_valid_msg_type(msg_type)
+[data_merger_node-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/type_support.py", line 35, in check_is_valid_msg_type
+[data_merger_node-4]     check_for_type_support(msg_type)
+[data_merger_node-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/type_support.py", line 29, in check_for_type_support
+[data_merger_node-4]     msg_or_srv_type.__class__.__import_type_support__()
+[data_merger_node-4]   File "/home/rc1/fruit_ws/install/robot_control_interfaces/local/lib/python3.10/dist-packages/robot_control_interfaces/msg/_serial_data.py", line 31, in __import_type_support__
+[data_merger_node-4]     module = import_type_support('robot_control_interfaces')
+[data_merger_node-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/import_type_support_impl.py", line 48, in import_type_support
+[data_merger_node-4]     raise UnsupportedTypeSupport(pkg_name)
+[data_merger_node-4] rosidl_generator_py.import_type_support_impl.UnsupportedTypeSupport: Could not import 'rosidl_typesupport_c' for package 'robot_control_interfaces'
+[joint_state_publisher_gui-1] Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+[ERROR] [serial_sender-5]: process has died [pid 521271, exit code 1, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/serial_sender --ros-args -r __node:=serial_sender --params-file /tmp/launch_params_2n8wxpox'].
+[joint_state_publisher_gui-1] [INFO] [1760404020.014178245] [joint_state_publisher_gui]: Waiting for robot_description to be published on the robot_description topic...
+[joint_state_publisher_gui-1] [INFO] [1760404020.030709942] [joint_state_publisher_gui]: Centering
+[joint_state_publisher_gui-1] [INFO] [1760404020.100377115] [joint_state_publisher_gui]: Centering
+[ERROR] [data_merger_node-4]: process has died [pid 521269, exit code 1, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node --ros-args -r __node:=data_merger_node'].
+^C[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-2] [INFO] [1760404026.323298520] [rclcpp]: signal_handler(signum=2)
+[rqt_robot_steering-3] [INFO] [1760404026.323319082] [rclcpp]: signal_handler(signum=2)
+[ERROR] [joint_state_publisher_gui-1]: process has died [pid 521263, exit code -2, cmd '/opt/ros/humble/lib/joint_state_publisher_gui/joint_state_publisher_gui --ros-args -r __node:=joint_state_publisher_gui -r /joint_states:=/manual_joint_states'].
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 521265]
+[INFO] [rqt_robot_steering-3]: process has finished cleanly [pid 521267]
+
+
+
+
+
+[fruit_arm_driver-5] [INFO] [1760405062.068651024] [fruit_arm_driver]: Publishing to servos : 0.6029264993869343, 1.163038154055566, -1.6799999335272047, -0.5956328633566004
+[fruit_arm_driver-5] [INFO] [1760405062.169396496] [fruit_arm_driver]: Publishing to servos : 0.6172818927974834, 1.1907295397716078, -1.7199999335272076, -0.609814598759556
+[fruit_arm_driver-5] [INFO] [1760405062.270249913] [fruit_arm_driver]: Publishing to servos : 0.6316232586585753, 1.2183938665090792, -1.7599608470346129, -0.6239824763051154
+[move_group-3] [WARN] [1760405062.278712537] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing r1, r2, r4
+[fruit_arm_driver-5] [INFO] [1760405062.370994864] [fruit_arm_driver]: Publishing to servos : 0.6438669181143204, 1.24201174216519, -1.7940766921545346, -0.6360780235185881
+[fruit_arm_driver-5] [INFO] [1760405062.471726613] [fruit_arm_driver]: Publishing to servos : 0.6525217292174288, 1.2587067713922913, -1.818192537274458, -0.6446281368813227
+[fruit_arm_driver-5] [INFO] [1760405062.572479954] [fruit_arm_driver]: Publishing to servos : 0.6575876919678996, 1.2684789541903816, -1.832308382394379, -0.6496328163933178
+[fruit_arm_driver-5] [INFO] [1760405062.664387015] [fruit_arm_driver]: Publishing to servos : 0.6590788339151905, 1.2713553495380323, -1.8364633140068984, -0.6511059199119709
+[fruit_arm_driver-5] [INFO] [1760405062.665608271] [fruit_arm_driver]: Goal execution succeeded!
+[move_group-3] [INFO] [1760405062.666172552] [moveit.simple_controller_manager.follow_joint_trajectory_controller_handle]: Controller 'manipulator_controller' successfully finished
+[move_group-3] [INFO] [1760405062.778474404] [moveit_ros.trajectory_execution_manager]: Completed trajectory execution with status SUCCEEDED ...
+[move_group-3] [INFO] [1760405062.778603264] [moveit_move_group_default_capabilities.execute_trajectory_action_capability]: Execution completed: SUCCEEDED
+[moveit_control-6] [INFO] [1760405062.778797250] [move_group_interface]: Execute request success!
+[INFO] [moveit_control-6]: process has finished cleanly [pid 529134]
+
+
+ialization
+[move_group-3] [WARN] [1760405421.395319922] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing r1, r2, r4
+[move_group-3] [WARN] [1760405422.494449023] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing r1, r2, r4
+
