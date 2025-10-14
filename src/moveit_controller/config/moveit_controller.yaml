@@ -1,10 +1,10 @@
 # 这个名字必须和你在 launch 文件中启动的节点名字匹配
 moveit_control: 
   ros__parameters:
-      position: #单位米
-        x: 0.1
-        y: 0.05
-        z: 0.273
+      # position: #单位米
+      #   x: 0.1
+      #   y: 0.05
+      #   z: 0.273
 
       # orientation: #角度
       #   roll: 0.0
@@ -12,8 +12,8 @@ moveit_control:
 
       
       Tolerances:
-        position: 0.01
-        orientation: 0.01
+        position: 0.05
+        orientation: 0.05
    
 
 

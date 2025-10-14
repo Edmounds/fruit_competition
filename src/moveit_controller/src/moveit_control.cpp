@@ -122,7 +122,6 @@ bool MoveItController::planAndExecute(double x, double y, double z)
     target_pose.position.x = x;
     target_pose.position.y = y;
     target_pose.position.z = z;
-
     // 设置容差
     move_group_->setGoalPositionTolerance(tol_pos_);
     move_group_->setGoalOrientationTolerance(tol_ori_);
@@ -130,7 +129,7 @@ bool MoveItController::planAndExecute(double x, double y, double z)
     // 设置位置目标
     move_group_->setPositionTarget(x, y, z);
 
-    RCLCPP_INFO(node_->get_logger(), "开始规划到位置: [%.3f, %.3f, %.3f]", x, y, z);
+    RCLCPP_WARN(node_->get_logger(), "开始规划到位置: [%.3f, %.3f, %.3f]", x, y, z);
 
     // 进行运动规划
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;

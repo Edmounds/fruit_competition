@@ -22,8 +22,9 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     finally:
+        # 只清理节点资源，不调用 rclpy.shutdown()
+        # launch 系统会统一管理 ROS 2 上下文的关闭
         node.destroy_node()
-        rclpy.shutdown()
 
         
 if __name__ == '__main__':

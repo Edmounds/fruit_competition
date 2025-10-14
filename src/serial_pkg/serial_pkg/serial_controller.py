@@ -11,8 +11,7 @@ class SerialServer(Node):
 
         if type == 'sender':
             node_name = 'serial_sender'
-
-        if type == 'receiver':
+        elif type == 'receiver':
             node_name = 'serial_receiver'
         else:
             node_name = 'serial_sender'
@@ -60,6 +59,7 @@ class SerialServer(Node):
                 10
             )
             self.arm_subscription  # 防止未使用警告
+            self.get_logger().info('串口发送节点初始化完成，等待 control_data 话题消息...')
 
         elif type == 'receiver':
             # 发布反馈数据话题
@@ -70,6 +70,7 @@ class SerialServer(Node):
             )
             # 创建定时器，定期检查串口数据（10ms周期）
             self.receive_timer = self.create_timer(0.01, self.receive_data)
+            self.get_logger().info('串口接收节点初始化完成，开始监听串口数据...')
 
         # 初始化缓冲区大小限制
         self.MAX_BUFFER_SIZE = 1024  # 最大缓冲区大小
@@ -160,7 +161,7 @@ class SerialServer(Node):
                 self.get_logger().warn(f'数据发送不完整：预期发送 {len(frame)} 字节，实际发送 {bytes_written} 字节')
                 return False
                 
-            self.get_logger().info(f'发送数据: linear_x={linear_x}, angular_z={angular_z}, '
+            self.get_logger().debug(f'发送数据: linear_x={linear_x}, angular_z={angular_z}, '
                             f'舵机=[{servo1}, {servo2}, {servo3}, {servo4}, {servo5}], 开关门={servo6}')
             return True
             

@@ -9,7 +9,7 @@ def generate_launch_description():
     # 声明启动参数
     port_arg = DeclareLaunchArgument(
         'port',
-        default_value='/dev/ttyACM0',
+        default_value='/dev/dm_imu',
         description='IMU串口设备路径'
     )
     
@@ -52,7 +52,7 @@ def generate_launch_description():
             'source_imu_topic': LaunchConfiguration('source_imu_topic'),
             'target_imu_topic': LaunchConfiguration('target_imu_topic'),
             'source_frame': 'imu_link',
-            'target_frame': 'imu_transformed',
+            'target_frame': 'imu_1',
             'base_frame': 'base_link'
         }],
         output='screen'

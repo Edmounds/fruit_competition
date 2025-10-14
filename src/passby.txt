@@ -135,3 +135,281 @@ ialization
 [move_group-3] [WARN] [1760405421.395319922] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing r1, r2, r4
 [move_group-3] [WARN] [1760405422.494449023] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: The complete state of the robot is not yet known.  Missing r1, r2, r4
 
+
+
+[rviz2-4] [INFO] [1760413573.309572275] [moveit_ros_visualization.motion_planning_frame]: MoveGroup namespace changed: / -> . Reloading params.
+[rviz2-4] [INFO] [1760413573.569773388] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.214347 seconds
+[rviz2-4] [INFO] [1760413573.569811055] [moveit_robot_model.robot_model]: Loading robot model 'car'...
+[rviz2-4] [WARN] [1760413573.583084918] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-4] [INFO] [1760413573.609561751] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-4] [INFO] [1760413573.610389982] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-4] [INFO] [1760413573.627722012] [interactive_marker_display_111251287205024]: Connected on namespace: /rviz_moveit_motion_planning_display/robot_interaction_interactive_marker_topic
+[rviz2-4] [WARN] [1760413573.630517919] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-4] [INFO] [1760413573.635016963] [moveit_ros_visualization.motion_planning_frame]: group manipulator
+[rviz2-4] [INFO] [1760413573.635036411] [moveit_ros_visualization.motion_planning_frame]: Constructing new MoveGroup connection for group 'manipulator' in namespace ''
+[rviz2-4] [INFO] [1760413573.640637579] [interactive_marker_display_111251287205024]: Sending request for interactive markers
+[rviz2-4] [INFO] [1760413573.643398773] [move_group_interface]: Ready to take commands for planning group manipulator.
+[rviz2-4] [INFO] [1760413573.672438096] [interactive_marker_display_111251287205024]: Service response received for initialization
+[moveit_control-6] [INFO] [1760413579.064562225] [moveit_control]: 收到移动请求: [0.150, 0.000, 0.100]
+[moveit_control-6] [WARN] [1760413579.064607516] [moveit_control]: 开始规划到位置: [0.150, 0.000, 0.100]
+[moveit_control-6] [INFO] [1760413579.064722851] [move_group_interface]: MoveGroup action client/server ready
+[move_group-3] [INFO] [1760413579.065065327] [moveit_move_group_default_capabilities.move_action_capability]: Received request
+[moveit_control-6] [INFO] [1760413579.065184648] [move_group_interface]: Planning request accepted
+[move_group-3] [INFO] [1760413579.065226721] [moveit_move_group_default_capabilities.move_action_capability]: executing..
+[move_group-3] [INFO] [1760413579.115194608] [moveit_move_group_default_capabilities.move_action_capability]: Planning request received for MoveGroup action. Forwarding to planning pipeline.
+[move_group-3] [INFO] [1760413579.116127569] [moveit.ompl_planning.model_based_planning_context]: Planner configuration 'manipulator' will use planner 'geometric::RRTConnect'. Additional configuration parameters will be set when the planner is constructed.
+[move_group-3] [ERROR] [1760413584.123754268] [ompl]: ./src/ompl/geometric/planners/rrt/src/RRTConnect.cpp:265 - manipulator/manipulator: Unable to sample any valid states for goal tree
+[move_group-3] [WARN] [1760413584.123800072] [moveit.ompl_planning.model_based_planning_context]: Invalid goal state
+[move_group-3] [INFO] [1760413584.140430172] [moveit.ompl_planning.model_based_planning_context]: Unable to solve the planning problem
+[move_group-3] [INFO] [1760413584.140497034] [moveit_move_group_default_capabilities.move_action_capability]: Unknown event
+[moveit_control-6] [INFO] [1760413584.141011353] [move_group_interface]: Planning request aborted
+[moveit_control-6] [ERROR] [1760413584.141228344] [move_group_interface]: MoveGroupInterface::plan() failed or timeout reached
+[moveit_control-6] [INFO] [1760413584.141268546] [moveit_control]: 规划 失败
+[moveit_control-6] [ERROR] [1760413584.141275330] [moveit_control]: 执行失败
+
+
+
+
+
+
+rc1@rc1-NUC11PAHi5:~/fruit_ws$ ros2 launch fruit_robot_launch  fruit_start.launch.py  
+[INFO] [launch]: All log files can be found below /home/rc1/.ros/log/2025-10-14-12-33-28-466116-rc1-NUC11PAHi5-596083
+[INFO] [launch]: Default logging verbosity is set to INFO
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+[INFO] [moveit_control-6]: process started with pid [596135]
+[INFO] [serial_sender-7]: process started with pid [596137]
+[INFO] [static_transform_publisher-1]: process started with pid [596125]
+[INFO] [robot_state_publisher-2]: process started with pid [596127]
+[INFO] [move_group-3]: process started with pid [596129]
+[INFO] [rviz2-4]: process started with pid [596131]
+[INFO] [fruit_arm_driver-5]: process started with pid [596133]
+[static_transform_publisher-1] [INFO] [1760416409.390939038] [static_transform_publisher0]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('0.000000', '0.000000', '0.000000')
+[static_transform_publisher-1] rotation: ('0.000000', '0.000000', '0.000000', '1.000000')
+[static_transform_publisher-1] from 'world' to 'base_link'
+[robot_state_publisher-2] [WARN] [1760416409.392274100] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-2] [INFO] [1760416409.392377012] [robot_state_publisher]: got segment base_link
+[robot_state_publisher-2] [INFO] [1760416409.392426694] [robot_state_publisher]: got segment camera_1
+[robot_state_publisher-2] [INFO] [1760416409.392436138] [robot_state_publisher]: got segment imu_1
+[robot_state_publisher-2] [INFO] [1760416409.392443424] [robot_state_publisher]: got segment lidar_1
+[robot_state_publisher-2] [INFO] [1760416409.392450735] [robot_state_publisher]: got segment link0_1
+[robot_state_publisher-2] [INFO] [1760416409.392457246] [robot_state_publisher]: got segment link1_1
+[robot_state_publisher-2] [INFO] [1760416409.392464569] [robot_state_publisher]: got segment link2_1
+[robot_state_publisher-2] [INFO] [1760416409.392470927] [robot_state_publisher]: got segment link3_1
+[robot_state_publisher-2] [INFO] [1760416409.392477746] [robot_state_publisher]: got segment link4_1
+[robot_state_publisher-2] [INFO] [1760416409.392484293] [robot_state_publisher]: got segment wheel0_1
+[robot_state_publisher-2] [INFO] [1760416409.392490809] [robot_state_publisher]: got segment wheel3_1
+[robot_state_publisher-2] [INFO] [1760416409.392497295] [robot_state_publisher]: got segment wheel4_1
+[rviz2-4] Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway.
+[move_group-3] [INFO] [1760416409.425239703] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.00358757 seconds
+[move_group-3] [INFO] [1760416409.425293144] [moveit_robot_model.robot_model]: Loading robot model 'car'...
+[moveit_control-6] [INFO] [1760416409.426418721] [moveit_control]: 容差参数加载完成:
+[moveit_control-6] [INFO] [1760416409.426513165] [moveit_control]:   位置容差: 0.050
+[moveit_control-6] [INFO] [1760416409.426529093] [moveit_control]:   姿态容差: 0.050
+[moveit_control-6] [WARN] [1760416409.427432522] [rcl.logging_rosout]: Publisher already registered for provided node name. If this is due to multiple nodes with the same name then all logs for that logger name will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.
+[move_group-3] [WARN] [1760416409.441027581] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[move_group-3] [INFO] [1760416409.441109310] [moveit_kinematics_base.kinematics_base]: number of joints: 4
+[move_group-3] [INFO] [1760416409.473760927] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-3] [INFO] [1760416409.473906425] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-3] [INFO] [1760416409.474228532] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-3] [INFO] [1760416409.474547228] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-3] [INFO] [1760416409.474561439] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-3] [INFO] [1760416409.475155599] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-3] [INFO] [1760416409.475170230] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-3] [INFO] [1760416409.475373272] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-3] [INFO] [1760416409.475633873] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-3] [WARN] [1760416409.476581352] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-3] [ERROR] [1760416409.476608423] [moveit.ros.occupancy_map_monitor.middleware_handle]: No 3D sensor plugin(s) defined for octomap updates
+[move_group-3] [INFO] [1760416409.479302683] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-3] [INFO] [1760416409.491965680] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-3] [INFO] [1760416409.498190698] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1760416409.498248647] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1760416409.498254379] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-3] [INFO] [1760416409.498297357] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-3] [INFO] [1760416409.498318125] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-3] [INFO] [1760416409.498323759] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1760416409.498335000] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1760416409.498341362] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-3] [INFO] [1760416409.498364341] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-3] [INFO] [1760416409.498376813] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-3] [INFO] [1760416409.498383473] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-3] [INFO] [1760416409.498386664] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-3] [INFO] [1760416409.498390153] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-3] [INFO] [1760416409.498393099] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-3] [INFO] [1760416409.498441641] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-3] [INFO] [1760416409.500470306] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-3] [INFO] [1760416409.504936259] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-3] [INFO] [1760416409.508632454] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1760416409.508661062] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1760416409.508664492] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-3] [INFO] [1760416409.508680404] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-3] [INFO] [1760416409.508691574] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-3] [INFO] [1760416409.508695891] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1760416409.508703825] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1760416409.508707514] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-3] [INFO] [1760416409.508712450] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-3] [INFO] [1760416409.508720106] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-3] [INFO] [1760416409.508722797] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-3] [INFO] [1760416409.508724852] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-3] [INFO] [1760416409.508726958] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-3] [INFO] [1760416409.508728915] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-3] [INFO] [1760416409.508731243] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-3] [INFO] [1760416409.509522305] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-3] [INFO] [1760416409.513273370] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-3] [INFO] [1760416409.516630009] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-3] [INFO] [1760416409.516650869] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-3] [INFO] [1760416409.518881512] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-3] [INFO] [1760416409.518912804] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-3] [INFO] [1760416409.519906809] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-3] [INFO] [1760416409.519935152] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-3] [INFO] [1760416409.520945720] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-3] [INFO] [1760416409.520980871] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-3] [INFO] [1760416409.549748391] [moveit.plugins.moveit_simple_controller_manager]: Added FollowJointTrajectory controller for manipulator_controller
+[move_group-3] [INFO] [1760416409.549970374] [moveit.plugins.moveit_simple_controller_manager]: Returned 1 controllers in list
+[move_group-3] [INFO] [1760416409.550019561] [moveit.plugins.moveit_simple_controller_manager]: Returned 1 controllers in list
+[move_group-3] [INFO] [1760416409.550224953] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-3] [INFO] [1760416409.550238709] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-3] [INFO] [1760416409.569471310] [move_group.move_group]: 
+[move_group-3] 
+[move_group-3] ********************************************************
+[move_group-3] * MoveGroup using: 
+[move_group-3] *     - ApplyPlanningSceneService
+[move_group-3] *     - ClearOctomapService
+[move_group-3] *     - CartesianPathService
+[move_group-3] *     - ExecuteTrajectoryAction
+[move_group-3] *     - GetPlanningSceneService
+[move_group-3] *     - KinematicsService
+[move_group-3] *     - MoveAction
+[move_group-3] *     - MotionPlanService
+[move_group-3] *     - QueryPlannersService
+[move_group-3] *     - StateValidationService
+[move_group-3] ********************************************************
+[move_group-3] 
+[move_group-3] [INFO] [1760416409.569540339] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-3] [INFO] [1760416409.569549953] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-3] Loading 'move_group/ApplyPlanningSceneService'...
+[move_group-3] Loading 'move_group/ClearOctomapService'...
+[move_group-3] Loading 'move_group/MoveGroupCartesianPathService'...
+[move_group-3] Loading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-3] Loading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-3] Loading 'move_group/MoveGroupKinematicsService'...
+[move_group-3] Loading 'move_group/MoveGroupMoveAction'...
+[move_group-3] Loading 'move_group/MoveGroupPlanService'...
+[move_group-3] Loading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-3] Loading 'move_group/MoveGroupStateValidationService'...
+[move_group-3] 
+[move_group-3] You can start planning now!
+[move_group-3] 
+[serial_sender-7] [INFO] [1760416409.615771268] [serial_sender]: 串口 /dev/serial_ch340 已打开，波特率 115200
+[serial_sender-7] [INFO] [1760416409.618389997] [serial_sender]: 串口发送节点初始化完成，等待 control_data 话题消息...
+[serial_sender-7] [INFO] [1760416409.619759378] [serial_sender]: 串口发送节点已启动，按 Ctrl+C 终止
+[moveit_control-6] [INFO] [1760416409.649054145] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.222301 seconds
+[moveit_control-6] [INFO] [1760416409.649109368] [moveit_robot_model.robot_model]: Loading robot model 'car'...
+[moveit_control-6] [WARN] [1760416409.689415460] [moveit_ros.robot_model_loader]: No kinematics plugins defined. Fill and load kinematics.yaml!
+[moveit_control-6] [INFO] [1760416409.710040971] [move_group_interface]: Ready to take commands for planning group manipulator.
+[moveit_control-6] [INFO] [1760416409.710081950] [moveit_control]: Planning frame: base_link
+[moveit_control-6] [INFO] [1760416409.710090853] [moveit_control]: End effector link: link4_1
+[moveit_control-6] [INFO] [1760416409.711308183] [moveit_control]: MoveIt控制服务已启动，等待服务请求...
+[moveit_control-6] [INFO] [1760416409.711336424] [moveit_control]: 服务名称: /move_to_position
+[moveit_control-6] [INFO] [1760416409.711343517] [moveit_control]: 节点运行中，按Ctrl+C退出
+[rviz2-4] [INFO] [1760416409.765358818] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-4] [INFO] [1760416409.765421841] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-4] [INFO] [1760416409.782901098] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-4] Warning: class_loader.impl: SEVERE WARNING!!! A namespace collision has occurred with plugin factory for class rviz_default_plugins::displays::InteractiveMarkerDisplay. New factory will OVERWRITE existing one. This situation occurs when libraries containing plugins are directly linked against an executable (the one running right now generating this message). Please separate plugins out into their own library or just don't link against the library and use either class_loader::ClassLoader/MultiLibraryClassLoader to open.
+[rviz2-4]          at line 253 in /opt/ros/humble/include/class_loader/class_loader/class_loader_core.hpp
+[fruit_arm_driver-5] [INFO] [1760416409.897616426] [fruit_arm_driver]: Action server "manipulator_controller/follow_joint_trajectory" is ready.
+[fruit_arm_driver-5] [WARN] [1760416409.899411229] [fruit_arm_driver]: 使用命令值作为状态！请确保舵机能准确执行命令。
+[fruit_arm_driver-5] [INFO] [1760416409.900017005] [fruit_arm_driver]: 已发布初始关节状态（包含轮子）: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+^C[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[moveit_control-6] [INFO] [1760416410.630059204] [rclcpp]: signal_handler(signum=2)
+[rviz2-4] [INFO] [1760416410.630061325] [rclcpp]: signal_handler(signum=2)
+[move_group-3] [INFO] [1760416410.630074815] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-2] [INFO] [1760416410.630102206] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-1] [INFO] [1760416410.630147730] [rclcpp]: signal_handler(signum=2)
+[rviz2-4] [ERROR] [1760416410.630773731] [moveit_ros_visualization.motion_planning_frame]: Action server: /recognize_objects not available
+[serial_sender-7] [INFO] [1760416410.632242005] [serial_sender]: 串口已关闭
+[serial_sender-7] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[rviz2-4] 
+[rviz2-4] >>> [rcutils|error_handling.c:108] rcutils_set_error_state()
+[rviz2-4] This error state is being overwritten:
+[rviz2-4] 
+[rviz2-4]   'rcl node's context is invalid, at ./src/rcl/node.c:428'
+[rviz2-4] 
+[rviz2-4] with this new error message:
+[rviz2-4] 
+[rviz2-4]   'the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67'
+[rviz2-4] 
+[rviz2-4] rcutils_reset_error() should be called after error handling to avoid this.
+[rviz2-4] <<<
+[rviz2-4] [ERROR] [1760416410.639493968] [rviz2]: Could not load display config: failed to create guard condition: the given context is not valid, either rcl_init() was not called or rcl_shutdown() was called., at ./src/rcl/guard_condition.c:67
+[move_group-3] [INFO] [1760416410.672099092] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-3] [INFO] [1760416410.672373914] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-3] [INFO] [1760416410.674611843] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-3] [INFO] [1760416410.675729984] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-3] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-3]          at line 127 in ./src/class_loader.cpp
+[fruit_arm_driver-5] Traceback (most recent call last):
+[fruit_arm_driver-5]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/fruit_arm_driver", line 33, in <module>
+[fruit_arm_driver-5]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'fruit_arm_driver')())
+[fruit_arm_driver-5]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/fruit_arm_driver.py", line 228, in main
+[fruit_arm_driver-5]     rclpy.shutdown()
+[fruit_arm_driver-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+[fruit_arm_driver-5]     _shutdown(context=context)
+[fruit_arm_driver-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+[fruit_arm_driver-5]     return context.shutdown()
+[fruit_arm_driver-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+[fruit_arm_driver-5]     self.__context.shutdown()
+[fruit_arm_driver-5] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 596125]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 596127]
+[INFO] [moveit_control-6]: process has finished cleanly [pid 596135]
+[INFO] [launch.user]: moveit_control has exited, but other nodes continue running.
+[serial_sender-7] Traceback (most recent call last):
+[serial_sender-7]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/serial_sender", line 33, in <module>
+[serial_sender-7]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'serial_sender')())
+[serial_sender-7]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/serial_sender.py", line 26, in main
+[serial_sender-7]     rclpy.shutdown()
+[serial_sender-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+[serial_sender-7]     _shutdown(context=context)
+[serial_sender-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+[serial_sender-7]     return context.shutdown()
+[serial_sender-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+[serial_sender-7]     self.__context.shutdown()
+[serial_sender-7] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241
+[ERROR] [serial_sender-7]: process has died [pid 596137, exit code 1, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/serial_sender --ros-args -r __node:=serial_sender --params-file /tmp/launch_params_c4dslkyo --params-file /tmp/launch_params_b_rzwly2 --params-file /tmp/launch_params_0hx8c6hc --params-file /tmp/launch_params_91xajj4j'].
+[INFO] [move_group-3]: process has finished cleanly [pid 596129]
+[move_group-3] 
+[ERROR] [rviz2-4]: process has died [pid 596131, exit code -11, cmd '/opt/ros/humble/lib/rviz2/rviz2 -d /home/rc1/fruit_ws/install/arm_config/share/arm_config/config/moveit.rviz --ros-args --params-file /tmp/launch_params_pc3e0f2o --params-file /tmp/launch_params_bbv2kohx --params-file /tmp/launch_params_tp6z7zjf'].
+[ERROR] [fruit_arm_driver-5]: process has died [pid 596133, exit code 1, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/fruit_arm_driver --ros-args -r __node:=fruit_arm_driver'].
+
+
+
+# 创建MoveGroup接口
+group = MoveGroupInterface("arm_group")
+
+# 设置位置目标
+group.set_position_target([x, y, z])
+
+# 关键步骤：启用位置优先IK
+group.set_planner_id("RRTConnectkConfigDefault")
+group.set_planning_time(5.0)
+group.set_num_planning_attempts(10)
+group.set_pose_reference_frame("base_link")
+group.set_goal_position_tolerance(0.01)
+group.set_goal_orientation_tolerance(3.14)  # 放宽方向容差
+
+# 执行规划
+plan = group.plan()

@@ -11,6 +11,17 @@ def generate_launch_description():
   
     #serial
     #        'serial_sender = serial_pkg.serial_sender:main',
+    data_merger_node = Node(
+        package='serial_pkg',
+        executable='data_merger_node',
+        name='data_merger_node',
+        output='screen',
+        # parameters=[
+        #     {'--args': '--ros-args --log-level info'}
+        # ],
+        emulate_tty=True,
+    )
+    
     serial_sender = Node(
         package='serial_pkg',
         executable='serial_sender',
@@ -27,8 +38,16 @@ def generate_launch_description():
     
     # tf publisher
     
-    # lidar
+    # lidar# cartographer
+    lidar_launch_path = os.path.join(get_package_share_directory('fruit_robot_launch'),
+                                      'launch',
+                                      'lidar.launch.py'
+    )
     
+    lidar_launch = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(lidar_launch_path),
+            )
+
     # gemini camera
     
     #=============================================================fruit_arm=============================================================
@@ -66,12 +85,9 @@ def generate_launch_description():
     
     # fruit_detector
     
-    # cartographer
-    
     # task_decision
     
     # rviz
-    
     
     #virtual_control
     manual_control_launch_path = os.path.join(
@@ -97,9 +113,11 @@ def generate_launch_description():
     )
      
     return LaunchDescription([
+        data_merger_node,
         fruit_arm,
-        moveit_control,
+        # moveit_control,
         moveit_exit_handler,
-        serial_sender
-        # manual_control
+        serial_sender,
+        lidar_launch,
+        manual_control
     ])

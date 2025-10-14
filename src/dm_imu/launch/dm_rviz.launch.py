@@ -13,7 +13,7 @@ def generate_launch_description():
             name='dm_imu_node',
             output='screen',
             parameters=[{
-                'port': '/dev/ttyACM0',
+                'port': '/dev/dm_imu',
                 'baud': 921600
             }]
         ),
