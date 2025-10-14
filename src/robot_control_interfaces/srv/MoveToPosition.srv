@@ -1,0 +1,8 @@
+# Request - 目标三维坐标
+float64 x  # X坐标 (米)
+float64 y  # Y坐标 (米)
+float64 z  # Z坐标 (米)
+---
+# Response - 执行结果
+bool success    # 是否成功
+string message  # 结果信息

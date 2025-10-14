@@ -11,6 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>moveit_ros_planning_interface</depend>
+  <depend>robot_control_interfaces</depend>
 
   <exec_depend>arm_config</exec_depend>
 

@@ -6,9 +6,9 @@ moveit_control:
         y: 0.05
         z: 0.273
 
-      orientation: #角度
-        roll: 0.0
-        pitch: 0.0
+      # orientation: #角度
+      #   roll: 0.0
+      #   pitch: 0.0
 
       
       Tolerances:

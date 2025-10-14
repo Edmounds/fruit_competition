@@ -9,15 +9,18 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
+find_package(robot_control_interfaces REQUIRED)
 
 # 添加可执行文件
 add_executable(moveit_control
   src/moveit_control.cpp
-  src/utils.cpp
 )
 
-
-ament_target_dependencies(moveit_control rclcpp moveit_ros_planning_interface)
+ament_target_dependencies(moveit_control
+  rclcpp
+  moveit_ros_planning_interface
+  robot_control_interfaces
+)
 
 # 为你的目标（可执行文件）添加头文件搜索路径
 target_include_directories(moveit_control PUBLIC

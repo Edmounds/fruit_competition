@@ -1,150 +1,175 @@
-#include <rclcpp/rclcpp.hpp>
-// 运动规划和执行功能进行交互的头文件
-#include <moveit/move_group_interface/move_group_interface.h>
-#include <vector>
+#include "moveit_control.hpp"
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
-
-// #include <Eigen/Dense>
-
 #include <cmath>
-#include "moveit_controller/utils.h"
 
-using std::vector;
-using std::string;
-using std::cout;
-using std::endl;
-using rclcpp::Node;
-using rclcpp::init;
+/**
+ * @brief 构造函数 - 初始化MoveIt控制器
+ *
+ * @param node ROS 2 节点共享指针
+ */
+MoveItController::MoveItController(rclcpp::Node::SharedPtr node)
+    : node_(node),
+      tol_pos_(0.05), tol_ori_(0.05)
+{
+    // 声明参数
+    declareParameters();
 
-// 定义一个将度数转换为弧度的函数
-double degreesToRadians(double degrees) {
+    // 加载参数
+    loadParameters();
+
+    // 初始化 MoveGroupInterface
+    move_group_ = std::make_shared<moveit::planning_interface::MoveGroupInterface>(node_, "manipulator");
+
+    // 获取并打印规划组信息
+    std::string planning_frame = move_group_->getPlanningFrame();
+    RCLCPP_INFO(node_->get_logger(), "Planning frame: %s", planning_frame.c_str());
+
+    std::string end_effector_link = move_group_->getEndEffectorLink();
+    RCLCPP_INFO(node_->get_logger(), "End effector link: %s", end_effector_link.c_str());
+
+    // 创建服务服务器
+    service_ = node_->create_service<robot_control_interfaces::srv::MoveToPosition>(
+        "/move_to_position",
+        std::bind(&MoveItController::handleMoveToPosition, this,
+                  std::placeholders::_1, std::placeholders::_2));
+
+    RCLCPP_INFO(node_->get_logger(), "MoveIt控制服务已启动，等待服务请求...");
+    RCLCPP_INFO(node_->get_logger(), "服务名称: /move_to_position");
+}
+
+/**
+ * @brief 服务回调函数
+ *
+ * @param request 服务请求（包含目标坐标）
+ * @param response 服务响应（包含执行结果）
+ */
+void MoveItController::handleMoveToPosition(
+    const std::shared_ptr<robot_control_interfaces::srv::MoveToPosition::Request> request,
+    std::shared_ptr<robot_control_interfaces::srv::MoveToPosition::Response> response)
+{
+    RCLCPP_INFO(node_->get_logger(), "收到移动请求: [%.3f, %.3f, %.3f]",
+                request->x, request->y, request->z);
+
+    // 执行规划和运动
+    bool success = planAndExecute(request->x, request->y, request->z);
+
+    // 设置响应
+    response->success = success;
+    if (success)
+    {
+        response->message = "机械臂成功移动到目标位置";
+        RCLCPP_INFO(node_->get_logger(), "执行成功");
+    }
+    else
+    {
+        response->message = "机械臂移动失败，规划或执行出错";
+        RCLCPP_ERROR(node_->get_logger(), "执行失败");
+    }
+}
+
+/**
+ * @brief 声明ROS参数
+ */
+void MoveItController::declareParameters()
+{
+    node_->declare_parameter("Tolerances.position", 0.05);
+    node_->declare_parameter("Tolerances.orientation", 0.05);
+}
+
+/**
+ * @brief 从参数服务器加载参数
+ */
+void MoveItController::loadParameters()
+{
+    tol_pos_ = node_->get_parameter("Tolerances.position").as_double();
+    tol_ori_ = node_->get_parameter("Tolerances.orientation").as_double();
+
+    RCLCPP_INFO(node_->get_logger(), "容差参数加载完成:");
+    RCLCPP_INFO(node_->get_logger(), "  位置容差: %.3f", tol_pos_);
+    RCLCPP_INFO(node_->get_logger(), "  姿态容差: %.3f", tol_ori_);
+}
+
+/**
+ * @brief 将度数转换为弧度
+ */
+double MoveItController::degreesToRadians(double degrees) const
+{
     return degrees * M_PI / 180.0;
 }
 
-double radiansToDegrees(double radians) {
+/**
+ * @brief 将弧度转换为度数
+ */
+double MoveItController::radiansToDegrees(double radians) const
+{
     return radians * 180.0 / M_PI;
 }
 
-
 /**
- * @brief 声明节点参数（位置、姿态、容差）
+ * @brief 执行运动规划和运动到指定位置
  *
- * @param node rclcpp 节点共享指针
+ * @param x 目标X坐标
+ * @param y 目标Y坐标
+ * @param z 目标Z坐标
+ * @return true 规划和执行成功
+ * @return false 规划或执行失败
  */
-void declare_parameters(Node::SharedPtr node) {
-    node->declare_parameter("position.x", 0.000);
-    node->declare_parameter("position.y", 0.000);
-    node->declare_parameter("position.z", 0.000);
-
-    node->declare_parameter("orientation.roll", 0.0);
-    node->declare_parameter("orientation.pitch", 0.0);
-
-    node->declare_parameter("Tolerances.position", 0.05);
-    node->declare_parameter("Tolerances.orientation", 0.05);
-}
-
-vector<double> get_parameters(Node::SharedPtr node){
-
-    vector<double> parameters;
-    parameters.push_back(node->get_parameter("position.x").as_double());
-    parameters.push_back(node->get_parameter("position.y").as_double());
-    parameters.push_back(node->get_parameter("position.z").as_double());
-
-    //orientation
-    parameters.push_back(node->get_parameter("orientation.roll").as_double());
-    parameters.push_back(node->get_parameter("orientation.pitch").as_double());
-    //tolerances
-    parameters.push_back(node->get_parameter("Tolerances.position").as_double());
-    parameters.push_back(node->get_parameter("Tolerances.orientation").as_double());
-
-
-    RCLCPP_WARN(node->get_logger(), "Parameters read from the parameter server:");
-    RCLCPP_WARN(node->get_logger(), "PARM:Target position: [%.3f, %.3f, %.3f]", parameters[0], parameters[1], parameters[2]);
-    RCLCPP_WARN(node->get_logger(), "PARM:Tolerances: [%.3f, %.3f]", parameters[5], parameters[6]);
-    return parameters;
-}
-
-
-int main(int argc, char** argv)
+bool MoveItController::planAndExecute(double x, double y, double z)
 {
-    init(argc, argv);
-    auto node = Node::make_shared("moveit_control");
-
-    declare_parameters(node);
-    
-    vector<double> parameters = get_parameters(node);
-
-    
-
-    double pos_x = parameters[0];
-    double pos_y = parameters[1];
-    double pos_z = parameters[2];
-    
-    vector<double> current_position = {0.0, -2.0}; 
-    vector<double> target_position = {pos_x, pos_y}; 
-
-    double yaw = -Utils::CalculateRelativeAngle(current_position, target_position);
-
-    yaw = 0.0;
-
-    // double yaw = atan2(pos_y, pos_x);
-    double roll = degreesToRadians(parameters[3]);
-    double pitch = degreesToRadians(parameters[4]);
-    double tol_pos = parameters[6];
-    double tol_ori = parameters[7];
-
-    
-
-    // 打印读取的参数
-    RCLCPP_INFO(node->get_logger(), "Target position: [%.3f, %.3f, %.3f]", pos_x, pos_y, pos_z);
-    RCLCPP_WARN(node->get_logger(), "Target orientation: [%.3f, %.3f, %.3f]", radiansToDegrees(roll), radiansToDegrees(pitch), radiansToDegrees(yaw));
-
-
-    // 创建MoveGroupInterface对象，指定规划组名称
-    moveit::planning_interface::MoveGroupInterface move_group(node, "manipulator");
-
-    // 获取规划组的参考坐标系
-    string planning_frame = move_group.getPlanningFrame();
-    RCLCPP_INFO(node->get_logger(), "Planning frame: %s", planning_frame.c_str());
-
-    // 获取规划组的末端执行器名称
-    string end_effector_link = move_group.getEndEffectorLink();
-    RCLCPP_INFO(node->get_logger(), "End effector link: %s", end_effector_link.c_str());
-
     // 设置目标位置
     geometry_msgs::msg::Pose target_pose;
+    target_pose.position.x = x;
+    target_pose.position.y = y;
+    target_pose.position.z = z;
 
-    // 创建一个四元数对象
-    tf2::Quaternion quaternion;
-    // 根据欧拉角设置四元数
-    quaternion.setRPY(roll, pitch, yaw);
+    // 设置容差
+    move_group_->setGoalPositionTolerance(tol_pos_);
+    move_group_->setGoalOrientationTolerance(tol_ori_);
 
-    // 将tf2的四元数转换为geometry_msgs的四元数
-    target_pose.orientation = tf2::toMsg(quaternion);
+    // 设置位置目标
+    move_group_->setPositionTarget(x, y, z);
 
-    RCLCPP_INFO(node->get_logger(), "new orientation %f %f %f %f", target_pose.orientation.x, target_pose.orientation.y, target_pose.orientation.z, target_pose.orientation.w);
-
-    // 使用从参数读取的位置值
-    target_pose.position.x = pos_x;
-    target_pose.position.y = pos_y;
-    target_pose.position.z = pos_z;
-
-    RCLCPP_INFO(node->get_logger(), "new position %f %f %f", target_pose.position.x, target_pose.position.y, target_pose.position.z);
-
-    move_group.setGoalPositionTolerance(tol_pos);
-    move_group.setGoalOrientationTolerance(tol_ori);
-    // move_group.setPoseTarget(target_pose);
-    move_group.setPositionTarget(target_pose.position.x, target_pose.position.y, target_pose.position.z);
+    RCLCPP_INFO(node_->get_logger(), "开始规划到位置: [%.3f, %.3f, %.3f]", x, y, z);
 
     // 进行运动规划
     moveit::planning_interface::MoveGroupInterface::Plan my_plan;
-    bool success = (move_group.plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
-    RCLCPP_INFO(node->get_logger(), "Planning %s", success ? "SUCCEEDED" : "FAILED");
+    bool success = (move_group_->plan(my_plan) == moveit::core::MoveItErrorCode::SUCCESS);
+    RCLCPP_INFO(node_->get_logger(), "规划 %s", success ? "成功" : "失败");
 
     // 执行运动规划
-    if (success) {
-        move_group.execute(my_plan);
+    if (success)
+    {
+        move_group_->execute(my_plan);
+        RCLCPP_INFO(node_->get_logger(), "执行完成");
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @brief 主函数
+ */
+int main(int argc, char **argv)
+{
+    rclcpp::init(argc, argv);
+    auto node = rclcpp::Node::make_shared("moveit_control");
+
+    try
+    {
+        // 创建MoveIt控制器对象
+        MoveItController controller(node);
+
+        // 持续运行，等待服务请求
+        RCLCPP_INFO(node->get_logger(), "节点运行中，按Ctrl+C退出");
+        rclcpp::spin(node);
+    }
+    catch (const std::exception &e)
+    {
+        RCLCPP_ERROR(node->get_logger(), "捕获异常: %s", e.what());
+        rclcpp::shutdown();
+        return 1;
     }
 
     rclcpp::shutdown();
