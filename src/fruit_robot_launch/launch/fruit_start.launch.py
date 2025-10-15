@@ -8,7 +8,7 @@ from launch.event_handlers import OnProcessExit
 from launch.actions import LogInfo
 
 def generate_launch_description():
-  
+
     #serial
     #        'serial_sender = serial_pkg.serial_sender:main',
     data_merger_node = Node(
@@ -16,9 +16,9 @@ def generate_launch_description():
         executable='data_merger_node',
         name='data_merger_node',
         output='screen',
-        # parameters=[
-        #     {'--args': '--ros-args --log-level info'}
-        # ],
+        parameters=[
+            {'--args': '--ros-args --log-level info'}
+        ],
         emulate_tty=True,
     )
     
@@ -101,6 +101,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(manual_control_launch_path)
     ) 
     
+    
     # 注册事件处理器：当 moveit_control 退出时仅打印日志，不关闭其他节点
     #ROS2 humble里面同一个launch文件,有一个node exit之后,默认会把其他node也exit掉
     moveit_exit_handler = RegisterEventHandler(
@@ -118,6 +119,6 @@ def generate_launch_description():
         # moveit_control,
         moveit_exit_handler,
         serial_sender,
-        lidar_launch,
-        manual_control
+        # lidar_launch,
+        # manual_control
     ])

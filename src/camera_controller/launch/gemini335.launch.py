@@ -23,20 +23,20 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([orbbec_launch_file_path]),
         # 如果需要，你可以在这里向 orbbec 的 launch 文件传递参数
         launch_arguments={'camera_name': 'camera',
-                          'depth_registration': 'true',
+                        #   'depth_registration': 'true',
                           # 'enable_color_auto_exposure': 'true',
                           # 'enable_color_auto_white_balance': 'true',
-                          'enable_d2c_viewer':'true',
+                        #   'enable_d2c_viewer':'true',
                           'enable_frame_sync':'true',
                           # 'enable_colored_point_cloud':'true',
-                          'align_mode':'HW',
+                        #   'align_mode':'HW',
                           'ordered_pc':'true',
                             'color_width':'640',
                             'color_height':'480',
-                            'color_fps':'60',
-                            'depth_width':'640',
-                            'depth_height':'480',
-                            'depth_fps':'60'
+                            'color_fps':'30',
+                            # 'depth_width':'640',
+                            # 'depth_height':'480',
+                            # 'depth_fps':'60'
                           }.items(),
     )
 

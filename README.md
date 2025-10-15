@@ -19,4 +19,4 @@ ros2 run tf2_tools view_frames
 ros2 service call /finish_trajectory cartographer_ros_msgs/srv/FinishTrajectory "{trajectory_id: 0}"
 
 ## 然后写入文件
-ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: '/home/rc1/fruit_ws/localization/maps/map.pbstream'}"
+ros2 service call /write_state cartographer_ros_msgs/srv/WriteState "{filename: '/home/rc1/fruit_ws/src/localization/maps/map.pbstream'}"

@@ -1,0 +1,23 @@
+# MoveIt视觉伺服控制器配置
+moveit_servo_node:
+  ros__parameters:
+    # 控制频率 (Hz)
+    control_rate: 10.0
+    
+    # 对齐阈值（像素）- 当偏移小于此值时认为已对齐
+    alignment_threshold: 10.0
+    
+    # 向下移动距离（米）- 对齐后竖直向下移动的距离
+    move_down_distance: 0.1
+    
+    # 像素到米的转换系数
+    # 这个系数取决于相机的标定参数和工作距离
+    # 需要根据实际情况调整
+    pixel_to_meter_x: 0.001  # X轴方向（水平）
+    pixel_to_meter_y: 0.001  # Y轴方向（垂直）
+    
+    # 最大XY方向速度（米/秒）
+    max_xy_velocity: 0.05
+    
+    # MoveIt规划组名称
+    planning_group: "manipulator"

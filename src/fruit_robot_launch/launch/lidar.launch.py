@@ -29,15 +29,21 @@ def generate_launch_description():
         'config',
         'cartographer.rviz'
     )
-    
-    cartographer_mapping_launch_path = os.path.join(
+
+    cartographer_localization_path= os.path.join(
         get_package_share_directory('localization'),
         'launch',
-        'mapping.launch.py'
+        'localization.launch.py'
     )
-    
-    cartographer_mapping = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(cartographer_mapping_launch_path),
+
+    # cartographer_localization_path= os.path.join(
+    #     get_package_share_directory('localization'),
+    #     'launch',
+    #     'mapping.launch.py'
+    # )    
+
+    cartographer_localization = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(cartographer_localization_path),
             )
 
     # fruit_arm_launch = IncludeLaunchDescription(
@@ -55,7 +61,7 @@ def generate_launch_description():
     return LaunchDescription([
         # fruit_arm_launch,
         lidar,
-        cartographer_mapping,
+        cartographer_localization,
         rviz_node,
         
 

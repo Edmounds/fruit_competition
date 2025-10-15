@@ -1,0 +1,7 @@
+# Request - 控制检测开关
+bool enable          # true=开启检测, false=停止检测
+string qr_type       # 二维码类型: 'B'=水果列表(每行一个), 'C'=数字序列或单个水果名
+---
+# Response - 执行结果
+bool success         # 操作是否成功
+string message       # 状态信息

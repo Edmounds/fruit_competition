@@ -169,6 +169,7 @@ class DataMergerNode(Node):
         linear_x = float(self.latest_twist.linear.x)
         angular_z = float(self.latest_twist.angular.z)
 
+
         # 从字典中获取弧度值，然后转换为舵机脉冲值
         # 注意：latest_joint_states 的 key 是 'j1', 'j2', 'j3', 'j4'
         servo1_val = self.rad_to_servo_val(
@@ -183,6 +184,7 @@ class DataMergerNode(Node):
         servo4_val = self.rad_to_servo_val(
             self.latest_joint_states.get('j4', 0.0), '240'
         )
+        
         
         # servo5 和 servo6 从参数读取
         try:
@@ -206,6 +208,7 @@ class DataMergerNode(Node):
 
         self.control_data_publisher.publish(msg)
         self.get_logger().debug(f"Published SerialData: linear_x={linear_x:.2f}, angular_z={angular_z:.2f}, servos=[{servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}, {servo5_val}, {servo6_val}]")
+
 
 def main(args=None):
     rclpy.init(args=args)

@@ -1,0 +1,272 @@
+78996)
+[fruit_arm_driver-6] [INFO] [1760539572.215819660] [fruit_arm_driver]: Joint j3 (Position: 0.37439755053026413)
+[fruit_arm_driver-6] [INFO] [1760539572.216024851] [fruit_arm_driver]: Joint j4 (Position: 0.6600608163612881)
+[fruit_arm_driver-6] [INFO] [1760539572.316802036] [fruit_arm_driver]: Joint j1 (Position: 0.680065156020938)
+[fruit_arm_driver-6] [INFO] [1760539572.317140423] [fruit_arm_driver]: Joint j2 (Position: 0.2955370372690739)
+[fruit_arm_driver-6] [INFO] [1760539572.317388756] [fruit_arm_driver]: Joint j3 (Position: 0.3857400794982182)
+[fruit_arm_driver-6] [INFO] [1760539572.317605032] [fruit_arm_driver]: Joint j4 (Position: 0.6800598503464627)
+[fruit_arm_driver-6] [INFO] [1760539572.418345854] [fruit_arm_driver]: Joint j1 (Position: 0.7000651560209404)
+[fruit_arm_driver-6] [INFO] [1760539572.418615311] [fruit_arm_driver]: Joint j2 (Position: 0.30423047960135785)
+[fruit_arm_driver-6] [INFO] [1760539572.418830210] [fruit_arm_driver]: Joint j3 (Position: 0.3970826084661724)
+[fruit_arm_driver-6] [INFO] [1760539572.419049346] [fruit_arm_driver]: Joint j4 (Position: 0.7000588843316374)
+[fruit_arm_driver-6] [INFO] [1760539572.519733433] [fruit_arm_driver]: Joint j1 (Position: 0.7200651560209428)
+[fruit_arm_driver-6] [INFO] [1760539572.519980995] [fruit_arm_driver]: Joint j2 (Position: 0.31292392193364177)
+[fruit_arm_driver-6] [INFO] [1760539572.520228515] [fruit_arm_driver]: Joint j3 (Position: 0.40842513743412656)
+[fruit_arm_driver-6] [INFO] [1760539572.520442636] [fruit_arm_driver]: Joint j4 (Position: 0.7200579183168121)
+[fruit_arm_driver-6] [INFO] [1760539572.621348212] [fruit_arm_driver]: Joint j1 (Position: 0.7400651560209452)
+[fruit_arm_driver-6] [INFO] [1760539572.621619612] [fruit_arm_driver]: Joint j2 (Position: 0.32161736426592574)
+[fruit_arm_driver-6] [INFO] [1760539572.621839585] [fruit_arm_driver]: Joint j3 (Position: 0.4197676664020807)
+[fruit_arm_driver-6] [INFO] [1760539572.622104298] [fruit_arm_driver]: Joint j4 (Position: 0.7400569523019868)
+[fruit_arm_driver-6] [INFO] [1760539572.723465216] [fruit_arm_driver]: Joint j1 (Position: 0.7600651560209477)
+[fruit_arm_driver-6] [INFO] [1760539572.723978268] [fruit_arm_driver]: Joint j2 (Position: 0.33031080659820966)
+[fruit_arm_driver-6] [INFO] [1760539572.724224636] [fruit_arm_driver]: Joint j3 (Position: 0.4311101953700348)
+[fruit_arm_driver-6] [INFO] [1760539572.724445262] [fruit_arm_driver]: Joint j4 (Position: 0.7600559862871614)
+[fruit_arm_driver-6] [INFO] [1760539572.825386472] [fruit_arm_driver]: Joint j1 (Position: 0.7800651560209502)
+[fruit_arm_driver-6] [INFO] [1760539572.825837970] [fruit_arm_driver]: Joint j2 (Position: 0.33900424893049363)
+[fruit_arm_driver-6] [INFO] [1760539572.826095105] [fruit_arm_driver]: Joint j3 (Position: 0.442452724337989)
+[fruit_arm_driver-6] [INFO] [1760539572.826310994] [fruit_arm_driver]: Joint j4 (Position: 0.7800550202723361)
+[fruit_arm_driver-6] [INFO] [1760539572.927090989] [fruit_arm_driver]: Joint j1 (Position: 0.8000651560209439)
+[fruit_arm_driver-6] [INFO] [1760539572.927398529] [fruit_arm_driver]: Joint j2 (Position: 0.3476976912627738)
+[fruit_arm_driver-6] [INFO] [1760539572.927631533] [fruit_arm_driver]: Joint j3 (Position: 0.4537952533059381)
+[fruit_arm_driver-6] [INFO] [1760539572.927846839] [fruit_arm_driver]: Joint j4 (Position: 0.800054054257502)
+[fruit_arm_driver-6] [INFO] [1760539573.028608958] [fruit_arm_driver]: Joint j1 (Position: 0.8200651560209374)
+[fruit_arm_driver-6] [INFO] [1760539573.028865367] [fruit_arm_driver]: Joint j2 (Position: 0.3563911335950539)
+[fruit_arm_driver-6] [INFO] [1760539573.029106622] [fruit_arm_driver]: Joint j3 (Position: 0.46513778227388725)
+[fruit_arm_driver-6] [INFO] [1760539573.029324037] [fruit_arm_driver]: Joint j4 (Position: 0.8200530882426679)
+[fruit_arm_driver-6] [INFO] [1760539573.130071411] [fruit_arm_driver]: Joint j1 (Position: 0.8400651560209309)
+[fruit_arm_driver-6] [INFO] [1760539573.130411097] [fruit_arm_driver]: Joint j2 (Position: 0.36508457592733395)
+[fruit_arm_driver-6] [INFO] [1760539573.130765010] [fruit_arm_driver]: Joint j3 (Position: 0.4764803112418363)
+[fruit_arm_driver-6] [INFO] [1760539573.131107333] [fruit_arm_driver]: Joint j4 (Position: 0.8400521222278335)
+[fruit_arm_driver-6] [INFO] [1760539573.231852782] [fruit_arm_driver]: Joint j1 (Position: 0.8600651560209245)
+[fruit_arm_driver-6] [INFO] [1760539573.232124243] [fruit_arm_driver]: Joint j2 (Position: 0.3737780182596141)
+[fruit_arm_driver-6] [INFO] [1760539573.232358776] [fruit_arm_driver]: Joint j3 (Position: 0.4878228402097855)
+[fruit_arm_driver-6] [INFO] [1760539573.232574921] [fruit_arm_driver]: Joint j4 (Position: 0.8600511562129993)
+[fruit_arm_driver-6] [INFO] [1760539573.333941084] [fruit_arm_driver]: Joint j1 (Position: 0.8800651560209183)
+[fruit_arm_driver-6] [INFO] [1760539573.334383612] [fruit_arm_driver]: Joint j2 (Position: 0.3824714605918942)
+[fruit_arm_driver-6] [INFO] [1760539573.334652928] [fruit_arm_driver]: Joint j3 (Position: 0.4991653691777346)
+[fruit_arm_driver-6] [INFO] [1760539573.334986987] [fruit_arm_driver]: Joint j4 (Position: 0.8800501901981652)
+[fruit_arm_driver-6] [INFO] [1760539573.435662189] [fruit_arm_driver]: Joint j1 (Position: 0.9000651560209119)
+[fruit_arm_driver-6] [INFO] [1760539573.435918026] [fruit_arm_driver]: Joint j2 (Position: 0.39116490292417433)
+[fruit_arm_driver-6] [INFO] [1760539573.436163138] [fruit_arm_driver]: Joint j3 (Position: 0.5105078981456838)
+[fruit_arm_driver-6] [INFO] [1760539573.436422024] [fruit_arm_driver]: Joint j4 (Position: 0.900049224183331)
+[fruit_arm_driver-6] [INFO] [1760539573.537202560] [fruit_arm_driver]: Joint j1 (Position: 0.9200651560209054)
+[fruit_arm_driver-6] [INFO] [1760539573.537478656] [fruit_arm_driver]: Joint j2 (Position: 0.3998583452564544)
+[fruit_arm_driver-6] [INFO] [1760539573.537689947] [fruit_arm_driver]: Joint j3 (Position: 0.5218504271136328)
+[fruit_arm_driver-6] [INFO] [1760539573.537900455] [fruit_arm_driver]: Joint j4 (Position: 0.9200482581684968)
+[fruit_arm_driver-6] [INFO] [1760539573.638591282] [fruit_arm_driver]: Joint j1 (Position: 0.9400651560208991)
+[fruit_arm_driver-6] [INFO] [1760539573.638839438] [fruit_arm_driver]: Joint j2 (Position: 0.40855178758873456)
+[fruit_arm_driver-6] [INFO] [1760539573.639055259] [fruit_arm_driver]: Joint j3 (Position: 0.533192956081582)
+[fruit_arm_driver-6] [INFO] [1760539573.639287380] [fruit_arm_driver]: Joint j4 (Position: 0.9400472921536628)
+[fruit_arm_driver-6] [INFO] [1760539573.740191533] [fruit_arm_driver]: Joint j1 (Position: 0.9600651560208927)
+[fruit_arm_driver-6] [INFO] [1760539573.740537801] [fruit_arm_driver]: Joint j2 (Position: 0.41724522992101465)
+[fruit_arm_driver-6] [INFO] [1760539573.740753103] [fruit_arm_driver]: Joint j3 (Position: 0.5445354850495311)
+[fruit_arm_driver-6] [INFO] [1760539573.740965070] [fruit_arm_driver]: Joint j4 (Position: 0.9600463261388286)
+[fruit_arm_driver-6] [INFO] [1760539573.841644325] [fruit_arm_driver]: Joint j1 (Position: 0.9800651560208863)
+[fruit_arm_driver-6] [INFO] [1760539573.841938116] [fruit_arm_driver]: Joint j2 (Position: 0.42593867225329474)
+[fruit_arm_driver-6] [INFO] [1760539573.842280998] [fruit_arm_driver]: Joint j3 (Position: 0.5558780140174802)
+[fruit_arm_driver-6] [INFO] [1760539573.842861891] [fruit_arm_driver]: Joint j4 (Position: 0.9800453601239942)
+[fruit_arm_driver-6] [INFO] [1760539573.944282853] [fruit_arm_driver]: Joint j1 (Position: 1.00006515602088)
+[fruit_arm_driver-6] [INFO] [1760539573.944548482] [fruit_arm_driver]: Joint j2 (Position: 0.4346321145855748)
+[fruit_arm_driver-6] [INFO] [1760539573.944763524] [fruit_arm_driver]: Joint j3 (Position: 0.5672205429854293)
+[fruit_arm_driver-6] [INFO] [1760539573.944971467] [fruit_arm_driver]: Joint j4 (Position: 1.0000443941091601)
+[fruit_arm_driver-6] [INFO] [1760539574.045719979] [fruit_arm_driver]: Joint j1 (Position: 1.0200651560208733)
+[fruit_arm_driver-6] [INFO] [1760539574.045985941] [fruit_arm_driver]: Joint j2 (Position: 0.4433255569178549)
+[fruit_arm_driver-6] [INFO] [1760539574.046208414] [fruit_arm_driver]: Joint j3 (Position: 0.5785630719533784)
+[fruit_arm_driver-6] [INFO] [1760539574.046418519] [fruit_arm_driver]: Joint j4 (Position: 1.0200434280943258)
+[fruit_arm_driver-6] [INFO] [1760539574.147393804] [fruit_arm_driver]: Joint j1 (Position: 1.0400651560208671)
+[fruit_arm_driver-6] [INFO] [1760539574.147658627] [fruit_arm_driver]: Joint j2 (Position: 0.452018999250135)
+[fruit_arm_driver-6] [INFO] [1760539574.147902153] [fruit_arm_driver]: Joint j3 (Position: 0.5899056009213276)
+[fruit_arm_driver-6] [INFO] [1760539574.149045404] [fruit_arm_driver]: Joint j4 (Position: 1.0400424620794917)
+[fruit_arm_driver-6] [INFO] [1760539574.249786072] [fruit_arm_driver]: Joint j1 (Position: 1.0600651560208607)
+[fruit_arm_driver-6] [INFO] [1760539574.250175610] [fruit_arm_driver]: Joint j2 (Position: 0.4607124415824151)
+[fruit_arm_driver-6] [INFO] [1760539574.250406688] [fruit_arm_driver]: Joint j3 (Position: 0.6012481298892767)
+[fruit_arm_driver-6] [INFO] [1760539574.250636195] [fruit_arm_driver]: Joint j4 (Position: 1.0600414960646576)
+[fruit_arm_driver-6] [INFO] [1760539574.351446172] [fruit_arm_driver]: Joint j1 (Position: 1.0800651560208543)
+[fruit_arm_driver-6] [INFO] [1760539574.351873153] [fruit_arm_driver]: Joint j2 (Position: 0.46940588391469523)
+[fruit_arm_driver-6] [INFO] [1760539574.352276959] [fruit_arm_driver]: Joint j3 (Position: 0.6125906588572259)
+[fruit_arm_driver-6] [INFO] [1760539574.352575437] [fruit_arm_driver]: Joint j4 (Position: 1.0800405300498235)
+[fruit_arm_driver-6] [INFO] [1760539574.454155077] [fruit_arm_driver]: Joint j1 (Position: 1.100065156020848)
+[fruit_arm_driver-6] [INFO] [1760539574.454488301] [fruit_arm_driver]: Joint j2 (Position: 0.4780993262469754)
+[fruit_arm_driver-6] [INFO] [1760539574.454726550] [fruit_arm_driver]: Joint j3 (Position: 0.623933187825175)
+[fruit_arm_driver-6] [INFO] [1760539574.454942711] [fruit_arm_driver]: Joint j4 (Position: 1.1000395640349894)
+[fruit_arm_driver-6] [INFO] [1760539574.556236547] [fruit_arm_driver]: Joint j1 (Position: 1.1200651560208414)
+[fruit_arm_driver-6] [INFO] [1760539574.556526438] [fruit_arm_driver]: Joint j2 (Position: 0.4867927685792554)
+[fruit_arm_driver-6] [INFO] [1760539574.556753127] [fruit_arm_driver]: Joint j3 (Position: 0.635275716793124)
+[fruit_arm_driver-6] [INFO] [1760539574.557039547] [fruit_arm_driver]: Joint j4 (Position: 1.120038598020155)
+[fruit_arm_driver-6] [INFO] [1760539574.657734228] [fruit_arm_driver]: Joint j1 (Position: 1.140065156020835)
+[fruit_arm_driver-6] [INFO] [1760539574.657984872] [fruit_arm_driver]: Joint j2 (Position: 0.49548621091153555)
+[fruit_arm_driver-6] [INFO] [1760539574.658232161] [fruit_arm_driver]: Joint j3 (Position: 0.6466182457610732)
+[fruit_arm_driver-6] [INFO] [1760539574.658463626] [fruit_arm_driver]: Joint j4 (Position: 1.140037632005321)
+[fruit_arm_driver-6] [INFO] [1760539574.759379726] [fruit_arm_driver]: Joint j1 (Position: 1.1600651560208286)
+[fruit_arm_driver-6] [INFO] [1760539574.759752976] [fruit_arm_driver]: Joint j2 (Position: 0.5041796532438158)
+[fruit_arm_driver-6] [INFO] [1760539574.759969924] [fruit_arm_driver]: Joint j3 (Position: 0.6579607747290224)
+[fruit_arm_driver-6] [INFO] [1760539574.760189001] [fruit_arm_driver]: Joint j4 (Position: 1.1600366659904868)
+[fruit_arm_driver-6] [INFO] [1760539574.861094619] [fruit_arm_driver]: Joint j1 (Position: 1.1800651560208222)
+[fruit_arm_driver-6] [INFO] [1760539574.861389904] [fruit_arm_driver]: Joint j2 (Position: 0.5128730955760958)
+[fruit_arm_driver-6] [INFO] [1760539574.861603008] [fruit_arm_driver]: Joint j3 (Position: 0.6693033036969713)
+[fruit_arm_driver-6] [INFO] [1760539574.861810640] [fruit_arm_driver]: Joint j4 (Position: 1.1800356999756525)
+[fruit_arm_driver-6] [INFO] [1760539574.962836585] [fruit_arm_driver]: Joint j1 (Position: 1.200065156020816)
+[fruit_arm_driver-6] [INFO] [1760539574.963746714] [fruit_arm_driver]: Joint j2 (Position: 0.521566537908376)
+[fruit_arm_driver-6] [INFO] [1760539574.964037373] [fruit_arm_driver]: Joint j3 (Position: 0.6806458326649206)
+[fruit_arm_driver-6] [INFO] [1760539574.964286899] [fruit_arm_driver]: Joint j4 (Position: 1.2000347339608184)
+[fruit_arm_driver-6] [INFO] [1760539575.065176455] [fruit_arm_driver]: Joint j1 (Position: 1.2200651560208096)
+[fruit_arm_driver-6] [INFO] [1760539575.065645633] [fruit_arm_driver]: Joint j2 (Position: 0.530259980240656)
+[fruit_arm_driver-6] [INFO] [1760539575.065877556] [fruit_arm_driver]: Joint j3 (Position: 0.6919883616328697)
+[fruit_arm_driver-6] [INFO] [1760539575.066094730] [fruit_arm_driver]: Joint j4 (Position: 1.220033767945984)
+[fruit_arm_driver-6] [INFO] [1760539575.166836024] [fruit_arm_driver]: Joint j1 (Position: 1.2400651560208031)
+[fruit_arm_driver-6] [INFO] [1760539575.167194466] [fruit_arm_driver]: Joint j2 (Position: 0.5389534225729362)
+[fruit_arm_driver-6] [INFO] [1760539575.167452692] [fruit_arm_driver]: Joint j3 (Position: 0.7033308906008189)
+[fruit_arm_driver-6] [INFO] [1760539575.167676831] [fruit_arm_driver]: Joint j4 (Position: 1.2400328019311502)
+[fruit_arm_driver-6] [INFO] [1760539575.268412680] [fruit_arm_driver]: Joint j1 (Position: 1.2600651560207967)
+[fruit_arm_driver-6] [INFO] [1760539575.268661357] [fruit_arm_driver]: Joint j2 (Position: 0.5476468649052163)
+[fruit_arm_driver-6] [INFO] [1760539575.268890899] [fruit_arm_driver]: Joint j3 (Position: 0.7146734195687681)
+[fruit_arm_driver-6] [INFO] [1760539575.269124344] [fruit_arm_driver]: Joint j4 (Position: 1.2600318359163158)
+[fruit_arm_driver-6] [INFO] [1760539575.369869007] [fruit_arm_driver]: Joint j1 (Position: 1.2800651560208025)
+[fruit_arm_driver-6] [INFO] [1760539575.370140493] [fruit_arm_driver]: Joint j2 (Position: 0.5563403072375018)
+[fruit_arm_driver-6] [INFO] [1760539575.370377272] [fruit_arm_driver]: Joint j3 (Position: 0.7260159485367241)
+[fruit_arm_driver-6] [INFO] [1760539575.370599994] [fruit_arm_driver]: Joint j4 (Position: 1.280030869901494)
+[fruit_arm_driver-6] [INFO] [1760539575.471308316] [fruit_arm_driver]: Joint j1 (Position: 1.3000651560208103)
+[fruit_arm_driver-6] [INFO] [1760539575.471563041] [fruit_arm_driver]: Joint j2 (Position: 0.5650337495697879)
+[fruit_arm_driver-6] [INFO] [1760539575.471801247] [fruit_arm_driver]: Joint j3 (Position: 0.7373584775046811)
+[fruit_arm_driver-6] [INFO] [1760539575.472057936] [fruit_arm_driver]: Joint j4 (Position: 1.3000299038866738)
+[fruit_arm_driver-6] [INFO] [1760539575.573767716] [fruit_arm_driver]: Joint j1 (Position: 1.3200651560208176)
+[fruit_arm_driver-6] [INFO] [1760539575.574446015] [fruit_arm_driver]: Joint j2 (Position: 0.5737271919020741)
+[fruit_arm_driver-6] [INFO] [1760539575.574689026] [fruit_arm_driver]: Joint j3 (Position: 0.748701006472638)
+[fruit_arm_driver-6] [INFO] [1760539575.574903826] [fruit_arm_driver]: Joint j4 (Position: 1.3200289378718533)
+[fruit_arm_driver-6] [INFO] [1760539575.675956533] [fruit_arm_driver]: Joint j1 (Position: 1.3400651560208252)
+[fruit_arm_driver-6] [INFO] [1760539575.676226286] [fruit_arm_driver]: Joint j2 (Position: 0.5824206342343603)
+[fruit_arm_driver-6] [INFO] [1760539575.676467139] [fruit_arm_driver]: Joint j3 (Position: 0.7600435354405952)
+[fruit_arm_driver-6] [INFO] [1760539575.676694964] [fruit_arm_driver]: Joint j4 (Position: 1.3400279718570334)
+[fruit_arm_driver-6] [INFO] [1760539575.777568777] [fruit_arm_driver]: Joint j1 (Position: 1.3600651560208328)
+[fruit_arm_driver-6] [INFO] [1760539575.777934526] [fruit_arm_driver]: Joint j2 (Position: 0.5911140765666464)
+[fruit_arm_driver-6] [INFO] [1760539575.778178596] [fruit_arm_driver]: Joint j3 (Position: 0.7713860644085522)
+[fruit_arm_driver-6] [INFO] [1760539575.778390299] [fruit_arm_driver]: Joint j4 (Position: 1.3600270058422128)
+[fruit_arm_driver-6] [INFO] [1760539575.879124503] [fruit_arm_driver]: Joint j1 (Position: 1.3800651560208403)
+[fruit_arm_driver-6] [INFO] [1760539575.879371004] [fruit_arm_driver]: Joint j2 (Position: 0.5998075188989325)
+[fruit_arm_driver-6] [INFO] [1760539575.879576070] [fruit_arm_driver]: Joint j3 (Position: 0.7827285933765091)
+[fruit_arm_driver-6] [INFO] [1760539575.879826136] [fruit_arm_driver]: Joint j4 (Position: 1.3800260398273927)
+[fruit_arm_driver-6] [INFO] [1760539575.981159036] [fruit_arm_driver]: Joint j1 (Position: 1.4000651560208481)
+[fruit_arm_driver-6] [INFO] [1760539575.981668165] [fruit_arm_driver]: Joint j2 (Position: 0.6085009612312188)
+[fruit_arm_driver-6] [INFO] [1760539575.981971021] [fruit_arm_driver]: Joint j3 (Position: 0.7940711223444664)
+[fruit_arm_driver-6] [INFO] [1760539575.982229860] [fruit_arm_driver]: Joint j4 (Position: 1.4000250738125728)
+[fruit_arm_driver-6] [INFO] [1760539576.083940612] [fruit_arm_driver]: Joint j1 (Position: 1.420065156020855)
+[fruit_arm_driver-6] [INFO] [1760539576.084339779] [fruit_arm_driver]: Joint j2 (Position: 0.6171944035635047)
+[fruit_arm_driver-6] [INFO] [1760539576.084568189] [fruit_arm_driver]: Joint j3 (Position: 0.8054136513124232)
+[fruit_arm_driver-6] [INFO] [1760539576.084779772] [fruit_arm_driver]: Joint j4 (Position: 1.420024107797752)
+[fruit_arm_driver-6] [INFO] [1760539576.185787376] [fruit_arm_driver]: Joint j1 (Position: 1.4400651560208628)
+[fruit_arm_driver-6] [INFO] [1760539576.186205799] [fruit_arm_driver]: Joint j2 (Position: 0.625887845895791)
+[fruit_arm_driver-6] [INFO] [1760539576.186454789] [fruit_arm_driver]: Joint j3 (Position: 0.8167561802803803)
+[fruit_arm_driver-6] [INFO] [1760539576.186793381] [fruit_arm_driver]: Joint j4 (Position: 1.440023141782932)
+[fruit_arm_driver-6] [INFO] [1760539576.287595662] [fruit_arm_driver]: Joint j1 (Position: 1.4600651560208702)
+[fruit_arm_driver-6] [INFO] [1760539576.287840065] [fruit_arm_driver]: Joint j2 (Position: 0.6345812882280771)
+[fruit_arm_driver-6] [INFO] [1760539576.288053927] [fruit_arm_driver]: Joint j3 (Position: 0.8280987092483372)
+[fruit_arm_driver-6] [INFO] [1760539576.288287549] [fruit_arm_driver]: Joint j4 (Position: 1.4600221757681113)
+[fruit_arm_driver-6] [INFO] [1760539576.389023043] [fruit_arm_driver]: Joint j1 (Position: 1.4800651560208777)
+[fruit_arm_driver-6] [INFO] [1760539576.389290370] [fruit_arm_driver]: Joint j2 (Position: 0.6432747305603632)
+[fruit_arm_driver-6] [INFO] [1760539576.389499250] [fruit_arm_driver]: Joint j3 (Position: 0.8394412382162943)
+[fruit_arm_driver-6] [INFO] [1760539576.389752279] [fruit_arm_driver]: Joint j4 (Position: 1.4800212097532914)
+[fruit_arm_driver-6] [INFO] [1760539576.490519284] [fruit_arm_driver]: Joint j1 (Position: 1.5000651560208855)
+[fruit_arm_driver-6] [INFO] [1760539576.490876292] [fruit_arm_driver]: Joint j2 (Position: 0.6519681728926495)
+[fruit_arm_driver-6] [INFO] [1760539576.491221478] [fruit_arm_driver]: Joint j3 (Position: 0.8507837671842514)
+[fruit_arm_driver-6] [INFO] [1760539576.491547321] [fruit_arm_driver]: Joint j4 (Position: 1.5000202437384713)
+[fruit_arm_driver-6] [INFO] [1760539576.592356475] [fruit_arm_driver]: Joint j1 (Position: 1.5200651560208929)
+[fruit_arm_driver-6] [INFO] [1760539576.592610323] [fruit_arm_driver]: Joint j2 (Position: 0.6606616152249356)
+[fruit_arm_driver-6] [INFO] [1760539576.592832441] [fruit_arm_driver]: Joint j3 (Position: 0.8621262961522084)
+[fruit_arm_driver-6] [INFO] [1760539576.593270279] [fruit_arm_driver]: Joint j4 (Position: 1.520019277723651)
+[fruit_arm_driver-6] [INFO] [1760539576.694134161] [fruit_arm_driver]: Joint j1 (Position: 1.5400651560209004)
+[fruit_arm_driver-6] [INFO] [1760539576.694410563] [fruit_arm_driver]: Joint j2 (Position: 0.6693550575572218)
+[fruit_arm_driver-6] [INFO] [1760539576.694620570] [fruit_arm_driver]: Joint j3 (Position: 0.8734688251201653)
+[fruit_arm_driver-6] [INFO] [1760539576.694823944] [fruit_arm_driver]: Joint j4 (Position: 1.5400183117088306)
+[fruit_arm_driver-6] [INFO] [1760539576.795846389] [fruit_arm_driver]: Joint j1 (Position: 1.55896711649593)
+[fruit_arm_driver-6] [INFO] [1760539576.796306847] [fruit_arm_driver]: Joint j2 (Position: 0.6775712127250598)
+[fruit_arm_driver-6] [INFO] [1760539576.796691802] [fruit_arm_driver]: Joint j3 (Position: 0.8841886268321215)
+[fruit_arm_driver-6] [INFO] [1760539576.797069732] [fruit_arm_driver]: Joint j4 (Position: 1.5589193592051556)
+[fruit_arm_driver-6] [INFO] [1760539576.897882493] [fruit_arm_driver]: Joint j1 (Position: 1.5692808823469053)
+[fruit_arm_driver-6] [INFO] [1760539576.898987218] [fruit_arm_driver]: Joint j2 (Position: 0.6820543191577659)
+[fruit_arm_driver-6] [INFO] [1760539576.899336446] [fruit_arm_driver]: Joint j3 (Position: 0.8900378362287898)
+[fruit_arm_driver-6] [INFO] [1760539576.899554311] [fruit_arm_driver]: Joint j4 (Position: 1.5692326268935937)
+[fruit_arm_driver-6] [INFO] [1760539577.000147735] [fruit_arm_driver]: Joint j1 (Position: 1.5706926877228542)
+[fruit_arm_driver-6] [INFO] [1760539577.000406701] [fruit_arm_driver]: Joint j2 (Position: 0.6826679915887769)
+[fruit_arm_driver-6] [INFO] [1760539577.000616521] [fruit_arm_driver]: Joint j3 (Position: 0.8908385083974805)
+[fruit_arm_driver-6] [INFO] [1760539577.000821508] [fruit_arm_driver]: Joint j4 (Position: 1.5706443640782963)
+[fruit_arm_driver-6] [INFO] [1760539577.055168966] [fruit_arm_driver]: Goal execution succeeded!
+[move_group-4] [INFO] [1760539577.055843412] [moveit.simple_controller_manager.follow_joint_trajectory_controller_handle]: Controller 'manipulator_controller' successfully finished
+[move_group-4] [INFO] [1760539577.198549536] [moveit_ros.trajectory_execution_manager]: Completed trajectory execution with status SUCCEEDED ...
+[move_group-4] [INFO] [1760539577.198829352] [moveit_move_group_default_capabilities.move_action_capability]: Solution was found and executed.
+[rviz2-5] [INFO] [1760539577.199417362] [move_group_interface]: Plan and Execute request complete!
+^C[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-9] [INFO] [1760539627.773000965] [rclcpp]: signal_handler(signum=2)
+[rqt_robot_steering-10] [INFO] [1760539627.773051941] [rclcpp]: signal_handler(signum=2)
+[move_group-4] [INFO] [1760539627.773248192] [rclcpp]: signal_handler(signum=2)
+[rviz2-5] [INFO] [1760539627.773376372] [rclcpp]: signal_handler(signum=2)
+[data_merger_node-1] Traceback (most recent call last):
+[data_merger_node-1]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node", line 33, in <module>
+[data_merger_node-1]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'data_merger_node')())
+[data_merger_node-1]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/merge_data.py", line 213, in main
+[data_merger_node-1]     rclpy.spin(node)
+[data_merger_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[data_merger_node-1]     executor.spin_once()
+[data_merger_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[data_merger_node-1]     self._spin_once_impl(timeout_sec)
+[data_merger_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 740, in _spin_once_impl
+[data_merger_node-1]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[data_merger_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 723, in wait_for_ready_callbacks
+[data_merger_node-1]     return next(self._cb_iter)
+[data_merger_node-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 620, in _wait_for_ready_callbacks
+[data_merger_node-1]     wait_set.wait(timeout_nsec)
+[data_merger_node-1] KeyboardInterrupt
+[robot_state_publisher-3] [INFO] [1760539627.773671225] [rclcpp]: signal_handler(signum=2)
+[static_transform_publisher-2] [INFO] [1760539627.773722877] [rclcpp]: signal_handler(signum=2)
+[data_merger_node-11] Traceback (most recent call last):
+[data_merger_node-11]   File "/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node", line 33, in <module>
+[data_merger_node-11]     sys.exit(load_entry_point('serial-pkg', 'console_scripts', 'data_merger_node')())
+[data_merger_node-11]   File "/home/rc1/fruit_ws/build/serial_pkg/serial_pkg/merge_data.py", line 213, in main
+[data_merger_node-11]     rclpy.spin(node)
+[data_merger_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[data_merger_node-11]     executor.spin_once()
+[data_merger_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 751, in spin_once
+[data_merger_node-11]     self._spin_once_impl(timeout_sec)
+[data_merger_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 740, in _spin_once_impl
+[data_merger_node-11]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[data_merger_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 723, in wait_for_ready_callbacks
+[data_merger_node-11]     return next(self._cb_iter)
+[data_merger_node-11]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 620, in _wait_for_ready_callbacks
+[data_merger_node-11]     wait_set.wait(timeout_nsec)
+[data_merger_node-11] KeyboardInterrupt
+[serial_sender-7] [INFO] [1760539627.774774557] [serial_sender]: 串口已关闭
+[serial_sender-7] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[serial_sender-12] [INFO] [1760539627.780089015] [serial_sender]: 串口已关闭
+[serial_sender-12] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[rviz2-5] [WARN] [1760539627.786911138] [interactive_marker_display_110197487028880]: Server not available while running, resetting
+[ERROR] [joint_state_publisher_gui-8]: process has died [pid 258150, exit code -2, cmd '/opt/ros/humble/lib/joint_state_publisher_gui/joint_state_publisher_gui --ros-args -r __node:=joint_state_publisher_gui --params-file /tmp/launch_params_1x2_basx -r /joint_states:=/arm_control_data'].
+[move_group-4] [INFO] [1760539627.831052176] [moveit.ros_planning_interface.moveit_cpp]: Deleting MoveItCpp
+[move_group-4] [INFO] [1760539627.832008569] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopped publishing maintained planning scene.
+[move_group-4] [INFO] [1760539627.833690613] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping world geometry monitor
+[move_group-4] [INFO] [1760539627.835939347] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[move_group-4] Warning: class_loader.ClassLoader: SEVERE WARNING!!! Attempting to unload library while objects created by this loader exist in the heap! You should delete your objects before attempting to unload the library or destroying the ClassLoader. The library will NOT be unloaded.
+[move_group-4]          at line 127 in ./src/class_loader.cpp
+[rviz2-5] 
+[rviz2-5] >>> [rcutils|error_handling.c:108] rcutils_set_error_state()
+[rviz2-5] This error state is being overwritten:
+[rviz2-5] 
+[rviz2-5]   'rcl node's context is invalid, at ./src/rcl/node.c:428'
+[rviz2-5] 
+[rviz2-5] with this new error message:
+[rviz2-5] 
+[rviz2-5]   'publisher's context is invalid, at ./src/rcl/publisher.c:389'
+[rviz2-5] 
+[rviz2-5] rcutils_reset_error() should be called after error handling to avoid this.
+[rviz2-5] <<<
+[rviz2-5] [INFO] [1760539627.920566524] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Stopping planning scene monitor
+[INFO] [static_transform_publisher-2]: process has finished cleanly [pid 258138]
+[INFO] [robot_state_publisher-9]: process has finished cleanly [pid 258152]
+[INFO] [robot_state_publisher-3]: process has finished cleanly [pid 258140]
+[INFO] [serial_sender-7]: process has finished cleanly [pid 258148]
+[INFO] [serial_sender-12]: process has finished cleanly [pid 258167]
+[ERROR] [data_merger_node-11]: process has died [pid 258165, exit code -2, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node --ros-args -r __node:=data_merger_node'].
+[ERROR] [data_merger_node-1]: process has died [pid 258136, exit code -2, cmd '/home/rc1/fruit_ws/install/serial_pkg/lib/serial_pkg/data_merger_node --ros-args -r __node:=data_merger_node'].
+[INFO] [move_group-4]: process has finished cleanly [pid 258142]
+[move_group-4] 
+[INFO] [fruit_arm_driver-6]: process has finished cleanly [pid 258146]
+[INFO] [rviz2-5]: process has finished cleanly [pid 258144]
+[INFO] [rqt_robot_steering-10]: process has finished cleanly [pid 258161]

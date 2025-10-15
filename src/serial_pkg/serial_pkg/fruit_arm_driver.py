@@ -116,17 +116,36 @@ class FruitArmDriver(Node):
         
         # 从目标中提取轨迹信息
         trajectory = goal_handle.request.trajectory
+        num_points = len(trajectory.points)
+        total_time = trajectory.points[-1].time_from_start.sec + trajectory.points[-1].time_from_start.nanosec * 1e-9
+        avg_interval = total_time / num_points if num_points > 0 else 0
+
+        self.get_logger().info(f'📊 轨迹统计:')
+        self.get_logger().info(f'  - 总点数: {num_points}')
+        self.get_logger().info(f'  - 总时长: {total_time:.2f}秒')
+        self.get_logger().info(f'  - 平均间隔: {avg_interval:.3f}秒')        
         
         # 记录开始执行前的状态，用于检测异常运动
         with self.feedback_lock:
             start_positions = self.latest_joint_feedback.copy()
         self.get_logger().info(f'Starting from positions: {start_positions}')
         
-        # 记录上一个点的时间，用于计算延时
+        # 记录上一个点的时间,用于计算延时
         last_point_time = 0.0
-
+        
+        # 降采样策略优化：轻度降采样以保持平滑性
+        # sample_rate=2 表示每2个点取1个（保留50%的点）
+        # 如果轨迹点很少(<20个),则不降采样
+        sample_rate = 2 if num_points > 20 else 1
+        sampled_points = trajectory.points[::sample_rate]
+        # 确保最后一个点一定被执行
+        if trajectory.points[-1] not in sampled_points:
+            sampled_points.append(trajectory.points[-1])
+        
+        self.get_logger().info(f'📝 执行策略: 采样率={sample_rate}, 执行点数={len(sampled_points)}')
+        
         # 遍历轨迹中的每一个路径点
-        for point in trajectory.points:
+        for point in sampled_points:
             # 检查是否有取消请求
             if goal_handle.is_cancel_requested:
                 goal_handle.canceled()
@@ -147,14 +166,16 @@ class FruitArmDriver(Node):
                 position = point.positions[i]
                 
                 servo_vals[servo_name] = position
-                self.get_logger().debug(f"Joint {joint_name} (Position: {position})")
+                # self.get_logger().info(f"Joint {joint_name} (Position: {position})")
 
-            # --- 计算延时 ---
-            # 计算当前点与上一个点之间的时间差，并延时
+            # --- 固定频率发送策略 ---
+            # 使用固定延时而非严格跟随time_from_start，提高流畅度
+            # 50Hz发送频率 (0.02秒间隔) 适合大多数舵机响应速度
+            fixed_interval = 0.02  # 可调节：0.01=100Hz, 0.02=50Hz, 0.03=33Hz
+            time.sleep(fixed_interval)
+            
+            # 可选：仍然记录时间用于调试
             current_point_time = point.time_from_start.sec + point.time_from_start.nanosec * 1e-9
-            sleep_duration = current_point_time - last_point_time
-            if sleep_duration > 0:
-                time.sleep(sleep_duration)
             last_point_time = current_point_time
 
             servo1_val = servo_vals.get('servo1', 0.0)  # 默认中位
@@ -181,6 +202,7 @@ class FruitArmDriver(Node):
             msg.position = [servo1_val, servo2_val, servo3_val, servo4_val]
 
             self.control_data_publisher_.publish(msg)
+            # time.sleep(0.3)
             # self.get_logger().info(f"Published to control_data: {msg}")
             
             # 更新关节状态反馈（使用命令值作为反馈）

@@ -32,26 +32,13 @@ def generate_launch_description():
         output='screen',
         parameters=[
             # 可以在这里添加参数
-                  ],
+                ],
         emulate_tty=True,
     )
 
-    depth_getter_node = Node(
-        package='camera_controller',
-        executable='get_depth',
-        name='get_depth',
-        output='screen',
-        parameters=[
-            # 可以在这里添加参数
-                  ],
-        emulate_tty=True,
-    )
-    
 
-  
     # 5. 将所有动作组合到 LaunchDescription 中并返回
     return LaunchDescription([
         orbbec_camera_launch,
         fruit_detect_node,
-        depth_getter_node
     ])

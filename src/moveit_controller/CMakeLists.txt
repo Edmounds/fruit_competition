@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(robot_control_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 # 添加可执行文件
 add_executable(moveit_control
@@ -22,6 +23,24 @@ ament_target_dependencies(moveit_control
   robot_control_interfaces
 )
 
+# 添加 moveit_servo 可执行文件
+add_executable(moveit_servo
+  src/moveit_servo.cpp
+)
+
+ament_target_dependencies(moveit_servo
+  rclcpp
+  moveit_ros_planning_interface
+  geometry_msgs
+  robot_control_interfaces
+)
+
+# 为 moveit_servo 添加头文件搜索路径
+target_include_directories(moveit_servo PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 # 为你的目标（可执行文件）添加头文件搜索路径
 target_include_directories(moveit_control PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -31,6 +50,7 @@ target_include_directories(moveit_control PUBLIC
 # 安装可执行文件
 install(TARGETS
   moveit_control
+  moveit_servo
   DESTINATION lib/${PROJECT_NAME}
 )
 

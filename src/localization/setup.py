@@ -10,7 +10,8 @@ setup(
     data_files=[
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob.glob('launch/*.launch.py')),
-        (os.path.join('share', package_name, 'config'), glob.glob('config/*'))
+        (os.path.join('share', package_name, 'config'), glob.glob('config/*')),
+        (os.path.join('share', package_name, 'maps'), glob.glob('maps/*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,6 +26,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'localization_node = localization.localization_node:main',
         ],
     },
 )

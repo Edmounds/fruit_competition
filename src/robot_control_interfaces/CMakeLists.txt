@@ -14,9 +14,12 @@ find_package(rosidl_default_generators REQUIRED)
 # find_package(<dependency> REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "topic/SerialData.msg"
+  "topic/FruitInfo.msg"
+  "topic/DetectionArray.msg"
 
   # "topic/ArmControl.msg"
   "srv/MoveToPosition.srv"
+  "srv/ControlDetection.srv"
 )
 
 if(BUILD_TESTING)
