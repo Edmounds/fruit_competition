@@ -3,13 +3,11 @@
 
 
 
-# servo5/6开关
-## 查看 servo5 当前值
-ros2 param get /data_merger_node servo5
+# 切换 servo5
+ros2 service call /toggle_servo5 std_srvs/srv/Trigger
 
-## 查看 servo6 当前值
-ros2 param get /data_merger_node servo6
-
+# 切换 servo6
+ros2 service call /toggle_servo6 std_srvs/srv/Trigger
 
 # lookup tf tree
 ros2 run tf2_tools view_frames

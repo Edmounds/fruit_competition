@@ -1,0 +1,5 @@
+cartesian_path_demo:
+  ros__parameters:
+    target_x: 0.2  # 目标位置的X坐标，单位为米
+    target_y: 0.0  # 目标位置的Y坐标，单位为米
+    target_z: 0.2  # 目标位置的Z坐标，单位为米

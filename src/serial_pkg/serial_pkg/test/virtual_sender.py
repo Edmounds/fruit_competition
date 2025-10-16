@@ -48,7 +48,6 @@ class Virtual_serial_sender(Node):
 
         
     def _prepare_send_frame(self,linear_x, angular_z, servo1, servo2, servo3, servo4, servo5, servo6, ser):
-        
 
         tx_buffer = bytearray()
         tx_buffer.append(FRAME_HEADER)
@@ -80,6 +79,9 @@ class Virtual_serial_sender(Node):
     
         return tx_buffer
        
+        
+
+
     def open_serial_port(self,port='/dev/ttyUSB0', baudrate=115200, timeout=0.1):
         try:
             ser = serial.Serial(port, baudrate, timeout=timeout)
@@ -98,16 +100,19 @@ class Virtual_serial_sender(Node):
             print("串口未打开，无法发送数据")
 
     # def timer_callback(self):
-    #     pass 
         
+
 
 def main():
     rclpy.init()
     node = Virtual_serial_sender()
+    ser = node.open_serial_port('/dev/ttyUSB0', 115200, 0.1)
+
     node.get_logger().info("虚拟串口发送节点已启动")
     rclpy.spin(node)
  
     node.destroy_node()
     rclpy.shutdown()
+    
 if __name__ == '__main__':  
     main()

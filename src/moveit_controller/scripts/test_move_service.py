@@ -51,7 +51,7 @@ def main():
     
     client = MoveItServiceClient()
     
-    future = client.send_move_request(0.188, 0.211, 0.206)
+    future = client.send_move_request(0.188, 0.00, 0.1)
     
 
     # 等待结果

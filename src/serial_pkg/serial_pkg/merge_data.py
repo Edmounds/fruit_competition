@@ -52,10 +52,10 @@ class DataMergerNode(Node):
 
         self.control_data_publisher = self.create_publisher(SerialData, 'control_data', 10)
         # --- 定时器 ---
-        # 10Hz 发布一次合并后的数据
-        # 读取 servo5 参数  的定时器
-        self.timer1 = self.create_timer(0.1, self.get_servo_data)
-        self.timer2 = self.create_timer(0.1, self.pack_and_publish_data) 
+        # 100Hz 发布一次合并后的数据，与舵机驱动同步
+        # 读取 servo5 参数的定时器
+        self.timer1 = self.create_timer(0.01, self.get_servo_data)
+        self.timer2 = self.create_timer(0.01, self.pack_and_publish_data) 
         
         self.last_servo5 = None
         self.last_servo6 = None
@@ -207,6 +207,7 @@ class DataMergerNode(Node):
         msg.angular_z = angular_z
 
         self.control_data_publisher.publish(msg)
+        # 高频运行下改为debug级别日志，避免性能影响
         self.get_logger().debug(f"Published SerialData: linear_x={linear_x:.2f}, angular_z={angular_z:.2f}, servos=[{servo1_val}, {servo2_val}, {servo3_val}, {servo4_val}, {servo5_val}, {servo6_val}]")
 
 

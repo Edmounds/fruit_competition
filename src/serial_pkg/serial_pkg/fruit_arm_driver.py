@@ -133,10 +133,9 @@ class FruitArmDriver(Node):
         # 记录上一个点的时间,用于计算延时
         last_point_time = 0.0
         
-        # 降采样策略优化：轻度降采样以保持平滑性
-        # sample_rate=2 表示每2个点取1个（保留50%的点）
-        # 如果轨迹点很少(<20个),则不降采样
-        sample_rate = 2 if num_points > 20 else 1
+        # 轨迹点采样优化：保留完整轨迹以获得最佳平滑性
+        # 降采样仅在点数非常多 (>100点) 时使用，保留90%以上的点
+        sample_rate = 10 if num_points > 100 else 1  # 最多降采样10%
         sampled_points = trajectory.points[::sample_rate]
         # 确保最后一个点一定被执行
         if trajectory.points[-1] not in sampled_points:
@@ -170,8 +169,8 @@ class FruitArmDriver(Node):
 
             # --- 固定频率发送策略 ---
             # 使用固定延时而非严格跟随time_from_start，提高流畅度
-            # 50Hz发送频率 (0.02秒间隔) 适合大多数舵机响应速度
-            fixed_interval = 0.02  # 可调节：0.01=100Hz, 0.02=50Hz, 0.03=33Hz
+            # 100Hz发送频率 (0.01秒间隔) 提高舵机平滑性
+            fixed_interval = 0.01  # 可调节：0.01=100Hz, 0.02=50Hz, 0.03=33Hz
             time.sleep(fixed_interval)
             
             # 可选：仍然记录时间用于调试
