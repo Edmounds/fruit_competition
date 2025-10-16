@@ -3,6 +3,7 @@ from rclpy.node import Node
 import playsound
 from ament_index_python.packages import get_package_share_directory
 import os
+import time
 
 class SpeakerController(Node):
     def __init__(self):
@@ -25,7 +26,11 @@ class SpeakerController(Node):
 def main(args=None):
     rclpy.init(args=args)
     speaker_controller = SpeakerController()
+    speaker_controller.play_sound('start.mp3')
+    time.sleep(1)
     speaker_controller.play_sound('comming.mp3')
+    time.sleep(1)
+    speaker_controller.play_sound('final.mp3')
     rclpy.spin(speaker_controller)
     speaker_controller.destroy_node()
     rclpy.shutdown()
