@@ -1,0 +1,7 @@
+# Request - 控制水果检测
+bool enable        # true: 启动/停止检测
+uint8 model_mode   # 模型选择: 0=仅成熟度, 1=仅种类
+---
+# Response - 操作结果
+bool success       # 操作是否成功
+string message     # 状态信息, e.g., "Detection enabled"

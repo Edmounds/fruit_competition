@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
 
 # uncomment the following section in order to fill in
 # further dependencies manually.
@@ -15,11 +16,12 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "topic/SerialData.msg"
   "topic/FruitInfo.msg"
-  "topic/DetectionArray.msg"
 
   # "topic/ArmControl.msg"
   "srv/MoveToPosition.srv"
   "srv/ControlDetection.srv"
+  "srv/FruitDetectionControl.srv"
+  DEPENDENCIES std_msgs
 )
 
 if(BUILD_TESTING)

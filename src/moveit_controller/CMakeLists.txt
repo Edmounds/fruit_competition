@@ -23,23 +23,12 @@ ament_target_dependencies(moveit_control
   robot_control_interfaces
 )
 
-# 添加 moveit_servo 可执行文件
-add_executable(moveit_servo
-  src/moveit_servo.cpp
+
+add_executable(cartesian_controller
+  src/cartesian_controller.cpp
 )
 
-ament_target_dependencies(moveit_servo
-  rclcpp
-  moveit_ros_planning_interface
-  geometry_msgs
-  robot_control_interfaces
-)
-
-add_executable(cartesian_path_demo
-  src/cartesian_path_demo.cpp
-)
-
-ament_target_dependencies(cartesian_path_demo
+ament_target_dependencies(cartesian_controller
   rclcpp
   moveit_ros_planning_interface
   geometry_msgs
@@ -47,11 +36,6 @@ ament_target_dependencies(cartesian_path_demo
 )
 
 
-# 为 moveit_servo 添加头文件搜索路径
-target_include_directories(moveit_servo PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
 
 
 # 为你的目标（可执行文件）添加头文件搜索路径
@@ -60,16 +44,11 @@ target_include_directories(moveit_control PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
-# target_include_directories(simple_servo_test PUBLIC
-# $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-# $<INSTALL_INTERFACE:include>
-# )
 
 # 安装可执行文件
 install(TARGETS
   moveit_control
-  moveit_servo
-  cartesian_path_demo
+  cartesian_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 

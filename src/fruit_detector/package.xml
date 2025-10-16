@@ -20,6 +20,7 @@
   <depend>image_transport</depend>
   <depend>std_msgs</depend>
   <depend>vision_msgs</depend>
+  <depend>robot_control_interfaces</depend>
   <depend>opencv</depend>
   <depend>openvino</depend>
 

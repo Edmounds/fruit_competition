@@ -5,6 +5,7 @@
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/camera_info.hpp>
 #include <std_msgs/msg/bool.hpp>
+#include <std_msgs/msg/header.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.hpp>
 #include <vision_msgs/msg/detection2_d_array.hpp>
@@ -13,8 +14,10 @@
 #include "fruit_detector/openvino_detect.hpp"
 
 // 包含自定义消息头文件
-#include "fruit_detector/msg/detection_array.hpp"
-#include "fruit_detector/msg/fruit_info.hpp"
+#include "robot_control_interfaces/msg/fruit_info.hpp"
+
+// 包含Service接口
+#include "robot_control_interfaces/srv/fruit_detection_control.hpp"
 
 namespace fruit_detector
 {
@@ -33,7 +36,7 @@ namespace fruit_detector
 
   private:
     // 类型别名
-    using DetectionArrayMsg = msg::DetectionArray;
+    using FruitInfoMsg = robot_control_interfaces::msg::FruitInfo;
 
     // 结构体：用于存储边界框信息
     struct BoundingBox
@@ -57,11 +60,14 @@ namespace fruit_detector
     void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
 
     /**
-     * @brief 检测开关控制回调
+     * @brief 水果检测服务回调 - 控制检测并返回结果
      *
-     * @param msg Bool消息（true=启用，false=禁用）
+     * @param request 服务请求（enable, model_mode）
+     * @param response 服务响应（success, is_ripe, fruit_type, offset_x, offset_y, message）
      */
-    void detectionEnableCallback(const std_msgs::msg::Bool::SharedPtr msg);
+    void handleDetectionService(
+        const std::shared_ptr<robot_control_interfaces::srv::FruitDetectionControl::Request> request,
+        std::shared_ptr<robot_control_interfaces::srv::FruitDetectionControl::Response> response);
 
     /**
      * @brief 计算两个边界框的IoU（交并比）
@@ -85,19 +91,19 @@ namespace fruit_detector
                       float iou_threshold = 0.3f);
 
     /**
-     * @brief 创建水果检测消息
+     * @brief 创建单个水果信息消息
      *
-     * @param classifier_detections 种类检测结果
-     * @param ripe_boxes 成熟区域边界框
+     * @param box 水果边界框
      * @param img_center_x 图像中心X坐标
      * @param img_center_y 图像中心Y坐标
-     * @return DetectionArrayMsg 水果信息数组
+     * @param header 消息头（包含时间戳）
+     * @return FruitInfoMsg 单个水果信息消息
      */
-    DetectionArrayMsg createFruitInfoMessage(
-        const std::vector<BoundingBox> &classifier_detections,
-        const std::vector<BoundingBox> &ripe_boxes,
+    FruitInfoMsg createFruitInfoMessage(
+        const BoundingBox &box,
         int img_center_x,
-        int img_center_y);
+        int img_center_y,
+        const std_msgs::msg::Header &header);
 
     /**
      * @brief 将检测结果转换为边界框结构
@@ -110,6 +116,56 @@ namespace fruit_detector
         const std::vector<std::vector<cv::Point2f>> &detections,
         const std::unique_ptr<yolo::Inference> &inference);
 
+    /**
+     * @brief 确保指定模型已加载
+     *
+     * @param mode 模型模式（0=成熟度, 1=种类）
+     */
+    void ensureModelLoaded(uint8_t mode);
+
+    /**
+     * @brief 卸载未使用的模型以释放资源
+     *
+     * @param keep_mode 需要保留的模型模式
+     */
+    void unloadUnusedModels(uint8_t keep_mode);
+
+    /**
+     * @brief 处理模式0：仅成熟度检测
+     *
+     * @param frame 输入图像
+     * @param annotated_frame 标注图像
+     * @param msg 图像消息
+     */
+    void processRipenessOnly(
+        cv::Mat &frame,
+        cv::Mat &annotated_frame,
+        const sensor_msgs::msg::Image::SharedPtr &msg);
+
+    /**
+     * @brief 处理模式1：仅种类检测
+     *
+     * @param frame 输入图像
+     * @param annotated_frame 标注图像
+     * @param msg 图像消息
+     */
+    void processClassifierOnly(
+        cv::Mat &frame,
+        cv::Mat &annotated_frame,
+        const sensor_msgs::msg::Image::SharedPtr &msg);
+
+    /**
+     * @brief 处理模式2：两阶段检测
+     *
+     * @param frame 输入图像
+     * @param annotated_frame 标注图像
+     * @param msg 图像消息
+     */
+    void processTwoStage(
+        cv::Mat &frame,
+        cv::Mat &annotated_frame,
+        const sensor_msgs::msg::Image::SharedPtr &msg);
+
     // 参数
     std::string image_topic_;         // 图像话题
     std::string model_path_a_;        // 成熟度检测模型路径
@@ -119,7 +175,20 @@ namespace fruit_detector
     float iou_threshold_;             // IoU阈值
     int image_center_x_;              // 图像中心X坐标
     int image_center_y_;              // 图像中心Y坐标
-    bool detection_enabled_;          // 检测开关
+
+    // FPS计算相关
+    std::chrono::time_point<std::chrono::steady_clock> last_frame_time_;
+    float current_fps_;
+    bool detection_enabled_; // 检测开关
+    bool first_frame_;
+    uint8_t model_mode_; // 模型模式: 0=仅成熟度, 1=仅种类, 2=两阶段
+
+    // 最新检测结果缓存（用于Service响应）
+    bool latest_is_ripe_;
+    int latest_fruit_type_;
+    float latest_offset_x_;
+    float latest_offset_y_;
+    std::mutex detection_mutex_; // 保护检测结果的互斥锁
 
     // 水果类型映射（类别名称 -> 类型编号）
     std::map<std::string, int> fruit_type_map_;
@@ -130,15 +199,12 @@ namespace fruit_detector
 
     // ROS订阅和发布
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_subscription_;
-    rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr detection_enable_subscription_;
 
     rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr processed_image_publisher_;
-    rclcpp::Publisher<DetectionArrayMsg>::SharedPtr detection_publisher_;
+    rclcpp::Publisher<FruitInfoMsg>::SharedPtr detection_publisher_;
 
-    // FPS计算相关
-    std::chrono::time_point<std::chrono::steady_clock> last_frame_time_;
-    float current_fps_;
-    bool first_frame_;
+    // Service服务器
+    rclcpp::Service<robot_control_interfaces::srv::FruitDetectionControl>::SharedPtr detection_service_;
   };
 
 } // namespace fruit_detector

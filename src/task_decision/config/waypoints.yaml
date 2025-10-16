@@ -1,0 +1,44 @@
+# waypoints.yaml - 采摘机器人导航路点配置文件
+
+# 关键观察点位
+# 注意：所有坐标和姿态都需要在RViz中根据你建立的地图精确标定
+# x, y 是在map坐标系下的位置 (单位: 米)
+# theta 是机器人朝向 (单位: 弧度), 0弧度通常指向X轴正方向
+
+zones:
+  # A区是蔬菜采摘区
+  A:
+    - name: "A1"
+      pose: { x: 1.25, y: 0.75, theta: 0.0 } 
+    - name: "A2"
+      pose: { x: 1.25, y: 1.25, theta: 0.0 }
+    - name: "A3"
+      pose: { x: 1.25, y: 1.75, theta: 0.0 }
+    - name: "A4"
+      pose: { x: 1.25, y: 2.25, theta: 0.0 }
+    # ... 其他A区点位
+
+  # B区是果园，需要先识别二维码
+  B:
+    qr_code_pose: { x: 2.3, y: 2.5, theta: 1.57 } # 识别B区二维码的位置和姿态
+    # trees:
+    #   - name: "B1" # 对应场地规则图中的1号位置
+    #     pose: { x: 2.8, y: 0.5, theta: 0.0 }
+    #   - name: "B2"
+    #     pose: { x: 2.8, y: 1.0, theta: 0.0 }
+    #   # ... 其他B区果树点位
+
+  # C区是按顺序采摘的菜地
+  C:
+    qr_code_pose: { x: 4.5, y: 2.5, theta: -1.57 } # 识别C区二维码的位置和姿态
+    vegetables:
+      - name: "C5" # 对应场地规则图中的5号位置
+        pose: { x: 4.0, y: 0.5, theta: 0.0 }
+      - name: "C6"
+        pose: { x: 4.0, y: 1.0, theta: 0.0 }
+      # ... 其他C区蔬菜点位
+
+# 其他功能性点位
+utility_points:
+  initial_pose: { x: 0.25, y: 0.25, theta: 0.0 } # 机器人起始位姿
+  collection_area: { x: 4.0, y: 2.7, theta: 3.14 } # 收集更换区的位置

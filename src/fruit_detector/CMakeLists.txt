@@ -20,6 +20,7 @@ find_package(image_transport REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(vision_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(robot_control_interfaces REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(OpenVINO REQUIRED COMPONENTS Runtime
   PATHS /usr/lib/cmake/openvino2025.3.0
@@ -29,17 +30,7 @@ find_package(OpenVINO REQUIRED COMPONENTS Runtime
 # Include directories
 include_directories(include)
 
-# 先生成消息接口
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/FruitInfo.msg"
-  "msg/DetectionArray.msg"
-  DEPENDENCIES std_msgs
-)
-
-# 创建接口库目标 - 这必须在生成接口后调用
-rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
-
-# 创建水果检测器库
+# 创建水果检测器库（不再生成自己的消息接口）
 add_library(fruit_detector_component SHARED
   src/fruit_detector.cpp
   src/openvino_detect.cpp
@@ -58,19 +49,20 @@ ament_target_dependencies(fruit_detector_component
   image_transport
   std_msgs
   vision_msgs
+  robot_control_interfaces
   OpenCV
   OpenVINO
 )
 
-# 链接消息接口库
-target_link_libraries(fruit_detector_component "${cpp_typesupport_target}")
-
-# 确保消息接口在组件库编译之前生成
-add_dependencies(fruit_detector_component ${PROJECT_NAME})
+# 不再需要链接自己的消息接口库，使用 robot_control_interfaces 的即可
 # Explicitly link OpenVINO libraries
 target_link_libraries(fruit_detector_component
   openvino::runtime
 )
+
+# 不再需要这个依赖，因为不生成自己的消息
+# add_dependencies(fruit_detector_component ${PROJECT_NAME})
+
 rclcpp_components_register_nodes(fruit_detector_component "fruit_detector::FruitDetector")
 
 # Create the standalone executable

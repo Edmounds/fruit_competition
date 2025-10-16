@@ -19,14 +19,18 @@ class QRRecognitionNode(Node):
         super().__init__('qr_recognition_node')
         self.get_logger().info('QR Recognition Node has been started.')
         
+        
         # 扫码开关标志
         self.scanning_enabled = False
+        
         
         # 当前二维码类型: 'B'=水果列表, 'C'=数字序列或单个水果名
         self.qr_type = 'C'  # 默认为C类型
         
+        
         # CV Bridge用于ROS图像消息和OpenCV图像格式转换
         self.bridge = CvBridge()
+        
         
         # Initialize camera and other necessary components here
         self.subscription = self.create_subscription(
