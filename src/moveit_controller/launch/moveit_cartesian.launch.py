@@ -19,10 +19,21 @@ def generate_launch_description():
     # 创建MoveIt Servo节点
     moveit_cartesian_path_node = Node(
         package='moveit_controller',
-        executable='cartesian_path_demo',
-        name='cartesian_path_demo',
+        executable='cartesian_controller',
+        name='cartesian_controller',
     )
     
+    moveit_pose_controller_node = Node(
+        package='moveit_controller',
+        executable='moveit_pose_controller',
+        name='moveit_pose_controller',
+        output='screen',
+        parameters=[
+            # 可以在这里添加参数
+        ]
+    )    
+    
     return LaunchDescription([
-        moveit_cartesian_path_node
+        moveit_cartesian_path_node,
+        moveit_pose_controller_node
     ])

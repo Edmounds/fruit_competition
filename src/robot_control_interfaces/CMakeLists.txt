@@ -19,6 +19,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
   # "topic/ArmControl.msg"
   "srv/MoveToPosition.srv"
+  "srv/MoveToPose.srv"
   "srv/ControlDetection.srv"
   "srv/FruitDetectionControl.srv"
   DEPENDENCIES std_msgs

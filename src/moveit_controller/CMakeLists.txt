@@ -36,10 +36,26 @@ ament_target_dependencies(cartesian_controller
 )
 
 
+add_executable(moveit_pose_controller
+  src/moveit_pose_controller.cpp
+)
+
+ament_target_dependencies(moveit_pose_controller
+  rclcpp
+  moveit_ros_planning_interface
+  robot_control_interfaces
+)
+
+
 
 
 # 为你的目标（可执行文件）添加头文件搜索路径
 target_include_directories(moveit_control PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
+target_include_directories(moveit_pose_controller PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
@@ -49,6 +65,7 @@ target_include_directories(moveit_control PUBLIC
 install(TARGETS
   moveit_control
   cartesian_controller
+  moveit_pose_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -63,6 +80,13 @@ install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}
 )
+
+# 安装测试脚本
+install(PROGRAMS
+  scripts/test_cartesian_client.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 # 安装include目录下的所有头文件
 install(DIRECTORY

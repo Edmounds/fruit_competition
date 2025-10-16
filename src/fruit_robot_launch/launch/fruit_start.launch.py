@@ -119,6 +119,6 @@ def generate_launch_description():
         # moveit_control,
         moveit_exit_handler,
         serial_sender,
-        lidar_launch,
-        manual_control
+        # lidar_launch,
+        # manual_control
     ])

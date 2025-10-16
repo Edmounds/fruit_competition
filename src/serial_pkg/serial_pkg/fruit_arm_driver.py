@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from rclpy.executors import MultiThreadedExecutor
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 # 导入Action和相关消息类型
 from control_msgs.action import FollowJointTrajectory
 from trajectory_msgs.msg import JointTrajectoryPoint
@@ -29,8 +30,21 @@ class FruitArmDriver(Node):
         
 
         # ------------------- Joint State Publisher -------------------
-        # 发布到 /joint_states 用于 RViz 显示
-        self.joint_state_publisher_ = self.create_publisher(JointState, 'joint_states', 10)
+        # 配置 QoS 以兼容 MoveIt 的 CurrentStateMonitor
+        # MoveIt 期望使用系统默认 QoS，但为了确保兼容性，明确设置
+        joint_state_qos = QoSProfile(
+            reliability=QoSReliabilityPolicy.RELIABLE,
+            durability=QoSDurabilityPolicy.VOLATILE,
+            history=QoSHistoryPolicy.KEEP_LAST,
+            depth=10
+        )
+        
+        # 发布到 /joint_states 用于 RViz 显示和 MoveIt 状态监控
+        self.joint_state_publisher_ = self.create_publisher(
+            JointState, 
+            'joint_states', 
+            joint_state_qos
+        )
         
         # 发布到 /arm_control_data 用于串口控制（统一使用 JointState）
         self.control_data_publisher_ = self.create_publisher(JointState, 'arm_control_data', 10)

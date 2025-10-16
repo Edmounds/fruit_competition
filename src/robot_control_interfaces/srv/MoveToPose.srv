@@ -1,0 +1,8 @@
+# 移动到命名位姿的服务定义
+# Request: 位姿名称
+string pose_name  # 位姿名称（如: home, harvest, scan, detect_left, detect_right, grab_left, grab_right）
+
+---
+# Response: 执行结果
+bool success      # 是否执行成功
+string message    # 执行结果消息

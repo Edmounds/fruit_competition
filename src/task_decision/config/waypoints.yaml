@@ -1,44 +1,51 @@
 # waypoints.yaml - 采摘机器人导航路点配置文件
 
 # 关键观察点位
-# 注意：所有坐标和姿态都需要在RViz中根据你建立的地图精确标定
+# 注意：所有坐标和姿态都需要在RViz中根据你建立的cartographer 2d地图精确标定
 # x, y 是在map坐标系下的位置 (单位: 米)
-# theta 是机器人朝向 (单位: 弧度), 0弧度通常指向X轴正方向
+# theta 是机器人朝向 (单位: 弧度), 0弧度指向X轴正方向, 逆时针为正
 
+# 起始区与收集区
+# ==================================
+start_location:
+  pose: {x: 0.5, y: 0.5, theta: 0.785} # 假设的起始位置 (坐标和朝向)
+
+collected_location:
+  pose: {x: 4.5, y: 2.5, theta: 3.14} # 机器人停靠在收集区的位置，朝向X轴负方向准备放置
+
+# 各个作业区
+# ==================================
 zones:
-  # A区是蔬菜采摘区
+  # A区是普通蔬菜采摘区, 通常是多个固定的采摘点
   A:
-    - name: "A1"
-      pose: { x: 1.25, y: 0.75, theta: 0.0 } 
-    - name: "A2"
-      pose: { x: 1.25, y: 1.25, theta: 0.0 }
-    - name: "A3"
-      pose: { x: 1.25, y: 1.75, theta: 0.0 }
-    - name: "A4"
-      pose: { x: 1.25, y: 2.25, theta: 0.0 }
-    # ... 其他A区点位
+    # 机器人需要依次停靠在这些点旁边进行采摘
+    - target_name: "A1"
+      pose: {x: 1.0, y: 2.5, theta: 0.0} # 机器人朝向X轴正方向，方便机械臂作业
+    - target_name: "A2"
+      pose: {x: 1.0, y: 2.0, theta: 0.0}
+    - target_name: "A3"
+      pose: {x: 1.0, y: 1.5, theta: 0.0}
+    - target_name: "A4"
+      pose: {x: 1.0, y: 1.0, theta: 0.0}
 
-  # B区是果园，需要先识别二维码
+  # B区是现代化果园，需要先扫描二维码
   B:
-    qr_code_pose: { x: 2.3, y: 2.5, theta: 1.57 } # 识别B区二维码的位置和姿态
-    # trees:
-    #   - name: "B1" # 对应场地规则图中的1号位置
-    #     pose: { x: 2.8, y: 0.5, theta: 0.0 }
-    #   - name: "B2"
-    #     pose: { x: 2.8, y: 1.0, theta: 0.0 }
-    #   # ... 其他B区果树点位
+    qr_scanner_pose: {x: 2.5, y: 3.0, theta: 1.57} # 机器人扫描B区二维码的最佳位置和朝向
+    # 具体的果树采摘点，可以预设多个，任务决策节点根据二维码信息选择
+    trees:
+      - target_name: "B1"
+        pose: {x: 2.8, y: 4.0, theta: 0.0}
+      - target_name: "B2"
+        pose: {x: 2.8, y: 3.5, theta: 0.0}
+      # ...可以根据场地布局添加 B3 到 B8 的所有可能停靠点
 
-  # C区是按顺序采摘的菜地
+  # C区是按顺序采摘的菜地，也需要先扫描二维码
   C:
-    qr_code_pose: { x: 4.5, y: 2.5, theta: -1.57 } # 识别C区二维码的位置和姿态
-    vegetables:
-      - name: "C5" # 对应场地规则图中的5号位置
-        pose: { x: 4.0, y: 0.5, theta: 0.0 }
-      - name: "C6"
-        pose: { x: 4.0, y: 1.0, theta: 0.0 }
-      # ... 其他C区蔬菜点位
-
-# 其他功能性点位
-utility_points:
-  initial_pose: { x: 0.25, y: 0.25, theta: 0.0 } # 机器人起始位姿
-  collection_area: { x: 4.0, y: 2.7, theta: 3.14 } # 收集更换区的位置
+    qr_scanner_pose: {x: 4.0, y: 4.0, theta: 1.57} # 机器人扫描C区二维码的最佳位置和朝向
+    # C区的采摘点，同样可以预设所有可能的停靠点
+    targets:
+      - target_name: "C1"
+        pose: {x: 4.5, y: 3.5, theta: -1.57} # 机器人朝向Y轴负方向
+      - target_name: "C2"
+        pose: {x: 4.5, y: 3.0, theta: -1.57}
+      # ...可以根据场地布局添加C区所有可能的停靠点

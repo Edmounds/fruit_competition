@@ -60,11 +60,21 @@ def generate_launch_description():
         arguments=['-d', rviz_config_dir],
         # parameters=[{'use_sim_time': use_sim_time}],
         output='screen')
+    
+    
+    localization_node = Node(
+        package='localization',
+        executable='localization_node',
+        name='localization_node',
+        output='screen',
+        # parameters=[{'use_sim_time': True}]
+    )
     #===============================================定义启动文件========================================================
     ld = LaunchDescription()
     ld.add_action(cartographer_node)
     # ld.add_action(cartographer_occupancy_grid_node)
     ld.add_action(rviz_node)
     ld.add_action(imu_launch)
+    ld.add_action(localization_node)
 
     return ld

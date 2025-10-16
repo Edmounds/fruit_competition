@@ -36,9 +36,10 @@ class DataMergerNode(Node):
         self.latest_joint_states = {} # 使用字典来存储关节名和位置，方便查找
 
         # --- 订阅者 ---
+        # 订阅 task_decision 节点发布的速度指令
         self.twist_subscriber = self.create_subscription(
             Twist,
-            '/cmd_vel', # rqt_robot_steering 默认发布到这个话题
+            '/cmd_vel', # task_decision 节点发布到这个话题
             self.twist_callback,
             10)
         

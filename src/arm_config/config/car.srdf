@@ -43,6 +43,30 @@
         <joint name="j3" value="1.5707"/>
         <joint name="j4" value="0"/>
     </group_state>
+    <group_state name="detect_left" group="manipulator">
+        <joint name="j1" value="1.5707"/>
+        <joint name="j2" value="-0.4513"/>
+        <joint name="j3" value="1.4001"/>
+        <joint name="j4" value="1.6778"/>
+    </group_state>
+    <group_state name="detect_right" group="manipulator">
+        <joint name="j1" value="-1.5707"/>
+        <joint name="j2" value="-0.4513"/>
+        <joint name="j3" value="1.4"/>
+        <joint name="j4" value="1.6778"/>
+    </group_state>
+    <group_state name="grab_left" group="manipulator">
+        <joint name="j1" value="1.5707"/>
+        <joint name="j2" value="1.1455"/>
+        <joint name="j3" value="1.7703"/>
+        <joint name="j4" value="-1.3306"/>
+    </group_state>
+    <group_state name="grab_right" group="manipulator">
+        <joint name="j1" value="-1.5707"/>
+        <joint name="j2" value="1.1455"/>
+        <joint name="j3" value="1.7703"/>
+        <joint name="j4" value="-1.33"/>
+    </group_state>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
